@@ -1,0 +1,161 @@
+@charset "utf-8";
+/* CSS Document */
+.adminPage{
+	width : 900px;
+	position: relative;
+}
+.ui-menu {
+	width: 200px;
+	border: solid 1px black;
+}
+.ui-menu a:hover{
+	background-color: #348DCE;
+}
+.titleList{
+	padding : 5px 0 5px 5px;
+	background-color: #348DCE;
+	color : #FFF;
+}
+.content{
+	width: 680px;
+	height: 500px;
+	float: right;
+	display:table;
+}
+
+#titleFrame{
+	color:#113F8C;
+    font-size:20px;
+    text-decoration:none;
+    text-shadow: 0.5px 1px 0px #E9F2F9,
+               1px 1.5px 0px #c9c9c9,
+               1.5px 2px 0px #B2D1E5,
+               2px 2.5px 0px #b9b9b9,
+               2.5px 3px 0px #B2D1E5;
+}
+
+
+
+.content div#public{	    
+    display: table;
+    background-color:#E9F2F9;
+    border-left:solid 18px #3B5998;
+    border-bottom: 2px solid #3B5998;
+    border-right: 2px solid #3B5998;
+    border-top: 2px solid #3B5998;
+    padding: 10px 20px 10px 20px;
+    margin-top: 20px;
+}
+
+.content div#public div#row {
+    height: 25px;
+    margin-top: 5px;
+}
+
+.content div#private div#row {
+    height: 25px;
+    margin-top: 5px;
+}
+
+.content div#public div#row * {    
+    vertical-align: middle;    
+    padding-left: 5px;
+}
+
+.content div#public select {
+    float: right;
+}
+
+.content div#private select {
+    float: right;
+}
+
+.content div#private {
+    margin-top: 20px;
+    background-color:#DFE4EE;
+    width: 630px;
+    display: table;
+    padding: 10px 20px 10px 20px;
+}
+
+.content div#private div#row p{
+    font-weight: bold;
+}
+
+.content div#private div#row *{
+    vertical-align: middle;
+    padding-left: 5px;
+}
+
+.content div#public div#row img{
+    padding: 3px;
+    border: 2px solid #0081bf;
+    border-radius:15px;
+    width: 12px;
+    height: 12px;
+}
+
+.content div#public div#row img#thongbao{
+    background-color: #ff0000;
+    
+}
+
+.content div#private div#row img#thongbao{
+    background-color: #ff0000;
+}
+
+.content div#public div#row a img{
+    border: 1px solid #0081bf;
+    width: 12px;
+    height: 12px;
+}
+
+.content div#private div#row img{
+    padding: 3px;
+    border: 2px solid #0081bf;
+    border-radius:15px; 
+    width: 12px;
+    height: 12px;
+}
+
+.content div#private div#row a img{
+    border: 1px solid #0081bf;
+    width: 12px;
+    height: 12px;
+}
+
+.content div#private div#row a img:hover{
+    border: 1px solid #0081bf;
+    background-color: #0081bf;
+}
+
+.content div#public div#row a img:hover{
+    border: 1px solid #0081bf;
+    background-color: #0081bf;
+}
+
+.content a {
+    text-decoration: none;
+    color: #000;
+}
+
+.content a:hover {
+    text-decoration: underline;
+}
+
+maincontent div.add-course{
+	float:right;
+	top:15px;
+	right:20px;
+	border: 2px solid #FFF;
+}
+
+maincontent div.add-course img{
+	margin:0px;
+	padding:2px;
+}
+
+maincontent div.add-course:hover {
+	border: 2px solid #075e7f;
+	border-radius:50px;
+}
