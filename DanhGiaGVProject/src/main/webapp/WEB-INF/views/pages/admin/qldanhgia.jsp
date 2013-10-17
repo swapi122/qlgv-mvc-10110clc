@@ -45,7 +45,7 @@
 				</div>
 				<div id="row" align="right">
 					<input class="update${bang.id}" id="button" type="button"
-						value="Sữa" /> <input class="delete${bang.id}" id="button"
+						value="Sữa" /> <input id="button"
 						type="button" value="Xóa" onclick="deleteFunction('${pageContext.request.contextPath}/admin/${bang.id}')"/>
 				</div>
 			</div>

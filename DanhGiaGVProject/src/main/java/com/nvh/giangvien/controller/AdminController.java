@@ -11,6 +11,10 @@ import java.util.List;
 
 
 
+
+
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -28,7 +32,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nvh.giangvien.model.BangDanhGia;
+import com.nvh.giangvien.model.CauHoi;
+import com.nvh.giangvien.model.LoaiCauHoi;
 import com.nvh.giangvien.service.BangDanhGiaService;
+import com.nvh.giangvien.service.CauHoiService;
+import com.nvh.giangvien.service.LoaiCauHoiService;
 
 @Controller
 @RequestMapping("/admin")
@@ -39,6 +47,12 @@ public class AdminController {
 	@Autowired
 	private BangDanhGiaService dgService;
 
+	@Autowired
+	private LoaiCauHoiService lchService;
+	
+	@Autowired
+	private CauHoiService chService;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String login() {
 		return "admin";
@@ -56,7 +70,9 @@ public class AdminController {
 	public String showBang(@PathVariable("id") int id, Model model){
 		logger.info("Get " + id);
 		BangDanhGia bdg = dgService.findById(id);
+		List<LoaiCauHoi> lchs = lchService.findAll();
 		model.addAttribute("bangdanhgia", bdg);
+		model.addAttribute("dslch", lchs);
 		return "admin/showbang";
 	}
 	
@@ -84,10 +100,11 @@ public class AdminController {
 	}
 	
 	@RequestMapping(params = "form" ,method = RequestMethod.POST)
-	public String themBang(@RequestParam String tenbang, RedirectAttributes redirect) throws UnsupportedEncodingException{
+	public String themBang(HttpServletRequest request, RedirectAttributes redirect) throws UnsupportedEncodingException{
+		request.setCharacterEncoding("utf8");
 		BangDanhGia bgd = new BangDanhGia();
-		logger.info("Save " + tenbang);
-		bgd.setTenbang(tenbang);
+		logger.info("Save " + request.getParameter("tenbang"));
+		bgd.setTenbang(request.getParameter("tenbang"));
 		bgd.setNgaytao(new Date());
 		dgService.save(bgd);
 		return "redirect:/admin?qldg";
@@ -99,4 +116,20 @@ public class AdminController {
 		return "admin/thembang";
 	}
 
+	@RequestMapping(value = "question", method = RequestMethod.POST)
+	public String getQuestion(HttpServletRequest request, Model model) throws UnsupportedEncodingException{
+		request.setCharacterEncoding("utf8");
+		logger.info("Call tao cau hoi");
+		CauHoi ch = new CauHoi();
+		ch.setId(request.getParameter("id"));
+		ch.setNoidung(request.getParameter("noidung"));
+		BangDanhGia bdg = dgService.findById(Integer.parseInt(request.getParameter("bangid")));
+		ch.setBang(bdg);
+		logger.info(request.getParameter("typequestion"));
+		LoaiCauHoi lch = lchService.findById(Integer.parseInt(request.getParameter("typequestion")));
+		ch.setLoaicau(lch);
+		chService.save(ch);
+		logger.info(ch.toString());
+		return "redirect:/admin?qldg";
+	}
 }

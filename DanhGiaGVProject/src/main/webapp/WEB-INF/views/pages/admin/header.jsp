@@ -8,3 +8,7 @@
 	src="${pageContext.request.contextPath}/resources/script/jquery-ui-1.10.3.custom.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/adminstyle.css" />
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />

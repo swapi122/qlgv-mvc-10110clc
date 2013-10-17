@@ -49,4 +49,11 @@ public class LoaiCauHoi implements Serializable{
 		this.cauhois = cauhois;
 	}
 
+	@Override
+	public String toString() {
+		return "LoaiCauHoi [id=" + id + ", tenloai=" + tenloai + ", cauhois="
+				+ cauhois + "]";
+	}
+
+	
 }
