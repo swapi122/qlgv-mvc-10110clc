@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +41,7 @@ public class LoaiCauHoi implements Serializable{
 		this.tenloai = tenloai;
 	}
 
-	@OneToMany(mappedBy = "loaicau" , cascade = CascadeType.ALL , orphanRemoval = true)
+	@OneToMany(mappedBy = "loaicau" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.EAGER)
 	public Set<CauHoi> getCauhois() {
 		return cauhois;
 	}
