@@ -20,15 +20,12 @@ public class TestModel {
 		BangDanhGiaService dgService = (BangDanhGiaService) mContext.getBean("JpaBangDanhGiaService");
 		LoaiCauHoiService lchService = (LoaiCauHoiService) mContext.getBean("JpaLoaiCauHoiService");
 		CauHoiService chService = (CauHoiService) mContext.getBean("JpaCauHoiService");
-		System.out.println(dgService.findAll());
-		CauHoi ch = new CauHoi();
-		ch.setId("CH01");
-		ch.setNoidung("la la la");
-		BangDanhGia bdg = dgService.findById(12);
-		ch.setBang(bdg);
-		LoaiCauHoi lch = lchService.findById(1);
-		ch.setLoaicau(lch);
-		chService.save(ch);
+		CauHoi ch = chService.findById("dasdasd");
+		System.out.println(ch.getNoidung());
+		BangDanhGia bdg = dgService.findById(1);
+		bdg.getCauhois().remove(ch);
+		dgService.save(bdg);
+		//chService.delete(ch);
 	}
 
 }

@@ -150,7 +150,7 @@ function deleteQuestion(URL){
 				</div>
 				<div id="row" align="right">
 					<input id="button" type="button" value="Sữa" /> <input id="button"
-						type="button" value="Xóa" onclick="deleteQuestion(${pageContext.request.contextPath}/admin/question/${cauhoi.id})" />
+						type="button" value="Xóa" onclick="deleteQuestion('${pageContext.request.contextPath}/admin/question/${cauhoi.id}?bangid=${bangdanhgia.id}')" />
 				</div>
 			</div>
 		</c:forEach>
