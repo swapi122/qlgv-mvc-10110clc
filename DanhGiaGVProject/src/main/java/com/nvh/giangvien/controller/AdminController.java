@@ -137,9 +137,11 @@ public class AdminController {
 	public String deleteQuestion(@PathVariable("id") String id ,HttpServletRequest request) throws UnsupportedEncodingException{
 		logger.info("Call delete cau hoi");
 		CauHoi ch = chService.findById(id);
-		chService.delete(ch);
-		logger.info(ch.toString());
-		logger.info("xoa thanh cong");
+		BangDanhGia bdg = dgService.findById(Integer.parseInt(request.getParameter("bangid")));
+		logger.info(ch.getId());
+		bdg.getCauhois().remove(ch);
+		dgService.save(bdg);
+		logger.info("Xoa thanh cong");
 		return "redirect:/admin?qldg";
 	}
 }
