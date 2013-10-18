@@ -57,7 +57,7 @@ public class BangDanhGia implements Serializable {
 		this.bangkqs = bangkqs;
 	}
 
-	@OneToMany(mappedBy = "bang" , cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "bang" ,cascade={CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE}, orphanRemoval = true, fetch = FetchType.EAGER)
 	public Set<CauHoi> getCauhois() {
 		return cauhois;
 	}
