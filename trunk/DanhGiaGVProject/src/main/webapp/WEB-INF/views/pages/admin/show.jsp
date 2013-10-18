@@ -14,6 +14,17 @@
     .validateTips { border: 1px solid transparent; padding: 0.3em; }
 </style>
 <script>
+function deleteQuestion(URL){
+	$.ajax({
+		url : URL,
+		type : 'POST',
+		success : function(){
+			alert("Xoa thanh cong");
+			location.reload();
+		}
+	});
+}
+;
 	$(function() {
 		var id = $("#id"), email = $("#email"), password = $("#password"), allFields = $(
 				[]).add(name).add(email).add(password), tips = $(".validateTips");
@@ -139,7 +150,7 @@
 				</div>
 				<div id="row" align="right">
 					<input id="button" type="button" value="Sữa" /> <input id="button"
-						type="button" value="Xóa" />
+						type="button" value="Xóa" onclick="deleteQuestion(${pageContext.request.contextPath}/admin/question/${cauhoi.id})" />
 				</div>
 			</div>
 		</c:forEach>

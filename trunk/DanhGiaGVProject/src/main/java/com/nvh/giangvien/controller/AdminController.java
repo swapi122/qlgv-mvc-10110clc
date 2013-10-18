@@ -132,4 +132,14 @@ public class AdminController {
 		logger.info(ch.toString());
 		return "redirect:/admin?qldg";
 	}
+	
+	@RequestMapping(value = "question/{id}", method = RequestMethod.POST)
+	public String deleteQuestion(@PathVariable("id") String id ,HttpServletRequest request) throws UnsupportedEncodingException{
+		logger.info("Call delete cau hoi");
+		CauHoi ch = chService.findById(id);
+		chService.delete(ch);
+		logger.info(ch.toString());
+		logger.info("xoa thanh cong");
+		return "redirect:/admin?qldg";
+	}
 }
