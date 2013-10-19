@@ -26,37 +26,6 @@ function deleteQuestion(URL){
 }
 ;
 	$(function() {
-		var id = $("#id"), email = $("#email"), password = $("#password"), allFields = $(
-				[]).add(name).add(email).add(password), tips = $(".validateTips");
-
-		function updateTips(t) {
-			tips.text(t).addClass("ui-state-highlight");
-			setTimeout(function() {
-				tips.removeClass("ui-state-highlight", 1500);
-			}, 500);
-		}
-
-		function checkLength(o, n, min, max) {
-			if (o.val().length > max || o.val().length < min) {
-				o.addClass("ui-state-error");
-				updateTips("Length of " + n + " must be between " + min
-						+ " and " + max + ".");
-				return false;
-			} else {
-				return true;
-			}
-		}
-
-		function checkRegexp(o, regexp, n) {
-			if (!(regexp.test(o.val()))) {
-				o.addClass("ui-state-error");
-				updateTips(n);
-				return false;
-			} else {
-				return true;
-			}
-		}
-
 		$("#dialog-form")
 				.dialog(
 						{
@@ -65,14 +34,14 @@ function deleteQuestion(URL){
 							width : 350,
 							modal : true,
 							buttons : {
-								"Tạo Câu Hỏi" : function() {
+								"Chấp nhận" : function() {
 									formData = $('#inputForm').serialize();
 									$.ajax({
 										url : $("#inputForm").attr('action'),
 										type : 'POST',
 										data: formData,
 										success : function(){
-											alert("Tạo thành công");
+											alert("Thành công");
 											location.reload();
 										}
 									});
@@ -83,14 +52,25 @@ function deleteQuestion(URL){
 								}
 							},
 							close : function() {
-								allFields.val("").removeClass("ui-state-error");
+								
 							}
 						});
 
 		$(".btn_them").button().click(function() {
+			$("#inputForm").attr("action","${pageContext.request.contextPath}/admin/question");
+			$("#id").val("");
+			$("#noidung").val("");
+			$("typequestion").val(1);
 			$("#dialog-form").dialog("open");
 		});
 	});
+function updateQuestion(idquestion,contentQuestion,idtype){
+	$("#id").val(idquestion);
+	$("#noidung").val(contentQuestion);
+	$("typequestion").val(idtype);
+	$("#inputForm").attr("action","${pageContext.request.contextPath}/admin/question/"+idquestion+"?updatequestion");
+	$("#dialog-form").dialog("open");
+}
 </script>
 
 <div class="content">
@@ -107,7 +87,7 @@ function deleteQuestion(URL){
 	<c:if test="${not empty bangdanhgia}">
 		<div id="dialog-form" title="Tạo câu hỏi">
 			<p class="validateTips">Điền đầy đủ thông tin</p>
-			<form id="inputForm" method="post" action="${pageContext.request.contextPath}/admin/question"">
+			<form id="inputForm" method="post" action="">
 				<fieldset>
 					<input name="bangid" id="bangid" type="hidden" value="${bangdanhgia.id}"/>
 					<label for="id">ID</label> <input type="text" name="id" id="id"
@@ -149,7 +129,7 @@ function deleteQuestion(URL){
 					Nội Dung : ${cauhoi.noidung}
 				</div>
 				<div id="row" align="right">
-					<input id="button" type="button" value="Sữa" /> <input id="button"
+					<input id="button" type="button" value="Sữa" onclick="updateQuestion('${cauhoi.id}','${cauhoi.noidung}','${cauhoi.loaicau.id}')" /> <input id="button"
 						type="button" value="Xóa" onclick="deleteQuestion('${pageContext.request.contextPath}/admin/question/${cauhoi.id}?bangid=${bangdanhgia.id}')" />
 				</div>
 			</div>

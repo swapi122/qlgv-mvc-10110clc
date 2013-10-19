@@ -140,4 +140,20 @@ public class AdminController {
 		logger.info("Xoa thanh cong");
 		return "redirect:/admin?qldg";
 	}
+	
+	@RequestMapping(value = "question/{id}", params="updatequestion" , method=RequestMethod.POST)
+	public String updateQuestion(@PathVariable("id") String id, HttpServletRequest request){
+		logger.info("update cau hoi " + id);
+		CauHoi ch = chService.findById(id);
+		ch.setNoidung(request.getParameter("noidung"));
+		//remove it from old loai cau hoi
+		LoaiCauHoi lch = lchService.findById(Integer.parseInt(request.getParameter("typequestion")));
+		ch.getLoaicau().getCauhois().remove(ch);
+		
+		//add it into new loai cau hoi
+		lch.getCauhois().add(ch);
+		ch.setLoaicau(lch);
+		chService.save(ch);
+		return "redirect:/admin?qldg";
+	}
 }
