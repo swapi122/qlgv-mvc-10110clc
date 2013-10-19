@@ -86,16 +86,12 @@ public class AdminController {
 		return "redirect:/admin?qldg";
 	}
 	
-	
-	@RequestMapping(value = "/{id}?form" , method=RequestMethod.GET)
-	public String updateBangForm(@PathVariable("id") int id, Model model){
-		logger.info("update " + id);
-		return "admin/update";
-	}
-	
-	@RequestMapping(value = "/{id}?form" , method=RequestMethod.POST)
-	public String updateBang(@PathVariable("id") int id, Model model){
+	@RequestMapping(value = "/{id}", params="update" , method=RequestMethod.POST)
+	public String updateBang(@PathVariable("id") int id, HttpServletRequest request){
 		logger.info("Update " + id);
+		BangDanhGia bdg = dgService.findById(id);
+		bdg.setTenbang(request.getParameter("noidung"));
+		dgService.save(bdg);
 		return "redirect:/admin?qldg";
 	}
 	
