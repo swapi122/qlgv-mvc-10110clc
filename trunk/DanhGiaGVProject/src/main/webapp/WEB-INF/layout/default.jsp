@@ -15,6 +15,7 @@
 	href="${pageContext.request.contextPath}/resources/styles/style.css"
 	type="text/css" />
 </head>
+
 <body style="background-image: url(${pageContext.request.contextPath}/resources/images/bgcongcuphai.png);">
 	<tiles:insertAttribute name="header" ignore="true" />
 	<div class="main-content inside">
