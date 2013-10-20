@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.nvh.giangvien.model.CauHoi;
+import com.nvh.giangvien.model.LoaiCauHoi;
 import com.nvh.giangvien.repository.CauHoiRepository;
 import com.nvh.giangvien.service.CauHoiService;
 
@@ -38,6 +39,11 @@ public class CauHoiServiceImpl implements CauHoiService {
 	public void delete(CauHoi ch) {
 		// TODO Auto-generated method stub
 		chRepository.delete(ch);
+	}
+
+	@Override
+	public List<CauHoi> findByloaicau(LoaiCauHoi lch) {
+		return chRepository.findByloaicau(lch);
 	}
 
 }
