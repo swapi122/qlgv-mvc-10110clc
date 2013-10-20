@@ -164,10 +164,19 @@ public class AdminController {
 		return "redirect:/admin?qldg";
 	}
 	
+	//load UI set bang danh gia
 	@RequestMapping(value = "setdanhgia" , method = RequestMethod.GET)
-	public String setDanhGia(){
-		choose.setId(1);
+	public String getDanhGia(Model model){
 		logger.info("Set Danh Gia");
+		List<BangDanhGia> dslchs = dgService.findAll();
+		model.addAttribute("lchs", dslchs);
+		return "admin/setdanhgia";
+	}
+	
+	@RequestMapping(value = "setdanhgia/{id}" , method = RequestMethod.POST)
+	public String setDanhGia(@PathVariable("id") int id, Model model){
+		logger.info("Set Danh Gia");
+		choose.setId(id);
 		return "admin/setdanhgia";
 	}
 }
