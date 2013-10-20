@@ -15,8 +15,11 @@ import java.util.List;
 
 
 
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.RequestWrapper;
 
 import org.hibernate.classic.Session;
 import org.slf4j.Logger;
@@ -31,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.nvh.applicationscope.BangDanhGiaChoose;
 import com.nvh.giangvien.model.BangDanhGia;
 import com.nvh.giangvien.model.CauHoi;
 import com.nvh.giangvien.model.LoaiCauHoi;
@@ -52,6 +56,9 @@ public class AdminController {
 	
 	@Autowired
 	private CauHoiService chService;
+	
+	@Autowired
+	private BangDanhGiaChoose choose;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String login() {
@@ -155,5 +162,12 @@ public class AdminController {
 		ch.setLoaicau(lch);
 		chService.save(ch);
 		return "redirect:/admin?qldg";
+	}
+	
+	@RequestMapping(value = "setdanhgia" , method = RequestMethod.GET)
+	public String setDanhGia(){
+		choose.setId(1);
+		logger.info("Set Danh Gia");
+		return "admin/setdanhgia";
 	}
 }
