@@ -8,16 +8,16 @@ ul li{
 </style>
 <div class="content" style="width: 100%">
 	<div id="public" style="width: 860px">
-		<div id="row">Bảng : ${bangdanhgia.id}</div>
-		<div id="row">Tên bảng : ${bangdanhgia.tenbang}</div>
-		<div id="row">Đánh giá giảng viên : ${thoikhoabieu.gv.hoten}</div>
-		<div id="row">Môn học : ${thoikhoabieu.monhoc.tenMH}</div>
+		<div id="row"><b>Bảng : ${bangdanhgia.id}</b></div>
+		<div id="row"><b>Tên bảng : ${bangdanhgia.tenbang}</b></div>
+		<div id="row"><b>Đánh giá giảng viên : ${thoikhoabieu.gv.hoten}</b></div>
+		<div id="row"><b>Môn học : ${thoikhoabieu.monhoc.tenMH}</b></div>
 	</div>
 	<c:forEach var="cauhoi" items="${bangdanhgia.cauhois}">
 		<div id="private" style="width: 880px">
 			<div id="row">${cauhoi.noidung}</div>
 			<div id="row">
-				<ul type="none" >
+				<ul>
 					<li>A <input type="radio" value="A" name="${cauhoi.id}"/></li>
 					<li>B <input type="radio" value="B" name="${cauhoi.id}"/></li>
 					<li>C <input type="radio" value="C" name="${cauhoi.id}"/></li>

@@ -46,6 +46,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/admin/show.jsp" />
 	</definition>
+	<definition extends="adminTemplate" name="admin/setdanhgia">
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/admin/setdanhgia.jsp" />
+	</definition>
 
 	<!-- logined Sinh Vien Template -->
 	<definition name="svTemplate" template="/WEB-INF/layout/adminlayout.jsp">
