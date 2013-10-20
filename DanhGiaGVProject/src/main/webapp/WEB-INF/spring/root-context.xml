@@ -61,4 +61,8 @@
 	<context:component-scan base-package="com.nvh.giangvien.service.jpa" />
 	<jpa:repositories base-package="com.nvh.giangvien.repository"
 		entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager" />
+
+	<bean id="choosebang" class="com.nvh.applicationscope.BangDanhGiaChoose">
+		
+	</bean>
 </beans>

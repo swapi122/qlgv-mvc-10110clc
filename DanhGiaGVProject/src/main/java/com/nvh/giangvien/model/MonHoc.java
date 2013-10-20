@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class MonHoc implements Serializable {
 
 	private String ID;
-	private	String TenMH;
+	private	String tenMH;
 	private Set<ThoiKhoaBieu> thoikhoabieu = new HashSet<ThoiKhoaBieu>();
 	@Id
 	@Column(name="ID")
@@ -29,10 +29,10 @@ public class MonHoc implements Serializable {
 	
 	@Column(name="TENMH")
 	public String getTenMH() {
-		return TenMH;
+		return tenMH;
 	}
 	public void setTenMH(String tenMH) {
-		TenMH = tenMH;
+		this.tenMH = tenMH;
 	}
 	
 	@OneToMany(mappedBy="monhoc", cascade = CascadeType.ALL, orphanRemoval = true)

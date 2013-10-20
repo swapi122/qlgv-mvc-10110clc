@@ -15,83 +15,94 @@
 		<put-attribute name="header" value="/WEB-INF/layout/headerlogined.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
 	</definition>
-	<definition extends="logined" name="giangvien">
-		<put-attribute name="pageName" value="GIẢNG VIÊN" />
-		<put-attribute name="title" value="Wellcome to GiangVien Page" />
-		<put-attribute name="body" value="/WEB-INF/views/pages/giangvien.jsp" />
-	</definition>
 
-	
+
+
 	<!-- loginedAdmin Template -->
 	<definition name="adminTemplate" template="/WEB-INF/layout/adminlayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/headerlogined.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
-		<put-attribute name="menuright" value="/WEB-INF/views/pages/admin/menuAdmin.jsp"/>
+		<put-attribute name="menuright"
+			value="/WEB-INF/views/pages/admin/menuAdmin.jsp" />
 		<put-attribute name="title" value="Wellcome to Admin's Page" />
 		<put-attribute name="pageName" value="ADMINISTRATOR" />
 		<put-attribute name="addlib"
 			value="/WEB-INF/views/pages/admin/header.jsp" />
 	</definition>
-	
-	<definition extends="adminTemplate" name="admin" >
+
+	<definition extends="adminTemplate" name="admin">
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/admin/admin.jsp" />
 	</definition>
 	<definition extends="adminTemplate" name="admin/qldanhgia">
-		<put-attribute name="body" value="/WEB-INF/views/pages/admin/qldanhgia.jsp"/>
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/admin/qldanhgia.jsp" />
 	</definition>
 	<definition extends="adminTemplate" name="admin/thembang">
-		<put-attribute name="body" value="/WEB-INF/views/pages/admin/ThemForm.jsp"/>
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/admin/ThemForm.jsp" />
 	</definition>
 	<definition extends="adminTemplate" name="admin/showbang">
-		<put-attribute name="body" value="/WEB-INF/views/pages/admin/show.jsp"/>
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/admin/show.jsp" />
 	</definition>
-	
+
 	<!-- logined Sinh Vien Template -->
-	<definition name="sinhvienTemplate" template="/WEB-INF/layout/adminlayout.jsp">
+	<definition name="svTemplate" template="/WEB-INF/layout/adminlayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/headerlogined.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
-		<put-attribute name="menuright" value="/WEB-INF/views/pages/sinhvien/menuSv.jsp"/>
-		<put-attribute name="title" value="Wellcome to Sinh Vien's Page" />
-		<put-attribute name="pageName" value="SINH VIÊN" />
+		<put-attribute name="menuright"
+			value="/WEB-INF/views/pages/sinhvien/menuSv.jsp" />
+		<put-attribute name="title" value="Wellcome to SinhVien's Page" />
+		<put-attribute name="pageName" value="Sinh Viên" />
 		<put-attribute name="addlib"
 			value="/WEB-INF/views/pages/admin/header.jsp" />
 	</definition>
-	
-	<definition extends="sinhvienTemplate" name="sinhvien" >
+
+
+	<definition extends="svTemplate" name="sinhvien">
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/sinhvien/SinhVien.jsp" />
 	</definition>
-	
+
+	<definition extends="logined" name="sinhviendgia">
+		<put-attribute name="title" value="Wellcome to Sinh Vien's Page" />
+		<put-attribute name="pageName" value="SINH VIÊN" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/sinhvien/svdanhgia.jsp" />
+	</definition>
+
 	<!-- logined Manager Template -->
 	<definition name="managerTemplate" template="/WEB-INF/layout/adminlayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/headerlogined.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
-		<put-attribute name="menuright" value="/WEB-INF/views/pages/manager/menuManager.jsp"/>
+		<put-attribute name="menuright"
+			value="/WEB-INF/views/pages/manager/menuManager.jsp" />
 		<put-attribute name="title" value="Wellcome to Manager's Page" />
 		<put-attribute name="pageName" value="Manager" />
 		<put-attribute name="addlib"
 			value="/WEB-INF/views/pages/admin/header.jsp" />
 	</definition>
-	
-	<definition extends="managerTemplate" name="manager" >
+
+	<definition extends="managerTemplate" name="manager">
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/manager/manager.jsp" />
 	</definition>
-	
+
 	<!-- logined Giang Vien Template -->
 	<definition name="giangvienTemplate" template="/WEB-INF/layout/adminlayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/headerlogined.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
-		<put-attribute name="menuright" value="/WEB-INF/views/pages/giangvien/menuGv.jsp"/>
+		<put-attribute name="menuright"
+			value="/WEB-INF/views/pages/giangvien/menuGv.jsp" />
 		<put-attribute name="title" value="Wellcome to giang vien's Page" />
 		<put-attribute name="pageName" value="GIẢNG VIÊN" />
 		<put-attribute name="addlib"
 			value="/WEB-INF/views/pages/admin/header.jsp" />
 	</definition>
-	
-	<definition extends="giangvienTemplate" name="giangvien" >
+
+	<definition extends="giangvienTemplate" name="giangvien">
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/giangvien/giangvien.jsp" />
-	</definition>	
+	</definition>
 </tiles-definitions>

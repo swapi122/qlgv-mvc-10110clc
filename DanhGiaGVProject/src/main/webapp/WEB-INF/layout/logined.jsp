@@ -14,6 +14,8 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/style.css"
 	type="text/css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/adminstyle.css" />
 <tiles:insertAttribute name="addlib" ignore="true" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <jsp:directive.page contentType="text/html; charset=UTF-8" />
@@ -31,7 +33,6 @@
 	</header>
 	<div class="main-content inside">
 		<maincontent> <!-- TemplateBeginEditable name="maincontent" -->
-		<tiles:insertAttribute name="menuright"/>
 		<tiles:insertAttribute name="body" /> 
 		<!-- TemplateEndEditable --> 
 		</maincontent>
