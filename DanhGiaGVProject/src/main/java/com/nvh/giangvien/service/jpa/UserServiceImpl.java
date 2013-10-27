@@ -3,6 +3,8 @@ package com.nvh.giangvien.service.jpa;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
@@ -15,12 +17,6 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
-	@Override
-	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return Lists.newArrayList(userRepository.findAll());
-	}
 
 	@Override
 	public User findById(String id) {
@@ -38,6 +34,12 @@ public class UserServiceImpl implements UserService {
 	public void delete(User contact) {
 		// TODO Auto-generated method stub
 		userRepository.delete(contact);
+	}
+
+	@Override
+	public Page<User> findAllByPage(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return userRepository.findAll(pageable);
 	}
 
 }

@@ -13,7 +13,7 @@
 
 		<a href="${pageContext.request.contextPath}/admin?qldg">
 			<div class="row">Quản lý Bảng Đánh Giá</div>
-		</a> <a href="#">
+		</a> <a href="${pageContext.request.contextPath}/admin/qluserlist">
 			<div class="row">Quản lý User</div>
 		</a> <a href="${pageContext.request.contextPath}/admin/setdanhgia">
 			<div class="row">Cài Đặt Đánh Giá</div>

@@ -17,6 +17,15 @@ import java.util.List;
 
 
 
+
+
+
+
+
+
+
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.RequestWrapper;
@@ -25,22 +34,31 @@ import org.hibernate.classic.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.common.collect.Lists;
 import com.nvh.applicationscope.BangDanhGiaChoose;
 import com.nvh.giangvien.model.BangDanhGia;
 import com.nvh.giangvien.model.CauHoi;
 import com.nvh.giangvien.model.LoaiCauHoi;
+import com.nvh.giangvien.model.User;
+import com.nvh.giangvien.model.UserGrid;
 import com.nvh.giangvien.service.BangDanhGiaService;
 import com.nvh.giangvien.service.CauHoiService;
 import com.nvh.giangvien.service.LoaiCauHoiService;
+import com.nvh.giangvien.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
@@ -56,6 +74,9 @@ public class AdminController {
 	
 	@Autowired
 	private CauHoiService chService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private BangDanhGiaChoose choose;
@@ -178,5 +199,51 @@ public class AdminController {
 		logger.info("Set Danh Gia");
 		choose.setId(id);
 		return "admin/setdanhgia";
+	}
+	
+	@RequestMapping(value = "qluserlist", method = RequestMethod.GET)
+	public String getUser(){
+		return "admin/qluserlist";
+	}
+	
+	//load UI quan ly user
+	@RequestMapping(value = "qlusergrid", method = RequestMethod.GET, 
+			 produces="application/json") 
+	@ResponseBody
+	public UserGrid getUser(
+			@RequestParam(value = "page", required = false) Integer page, 
+			@RequestParam(value = "rows", required = false) Integer rows, 
+			@RequestParam(value = "sidx", required = false) String sortBy, 
+			@RequestParam(value = "sord", required = false) String order){
+		logger.info("Listing Users for grid with page: {}, rows: {}", page, rows); 
+		logger.info("Listing Users for grid with sort: {}, order: {}", sortBy, order);
+		// Process order by 
+		Sort sort = null; 
+		String orderBy = sortBy; 
+		if (orderBy != null && orderBy.equals("typeaccount")) orderBy = "typeaccount";
+		if (orderBy != null && order != null) { 
+			if (order.equals("desc")) { 
+				sort = new Sort(Sort.Direction.DESC, orderBy);
+			} else 
+				sort = new Sort(Sort.Direction.ASC, orderBy); 
+		}
+		// Constructs page request for current page 
+		// Note: page number for Spring Data JPA starts with 0, while jqGrid starts with 1 
+		PageRequest pageRequest = null; 
+		if (sort != null) { 
+			pageRequest = new PageRequest(page - 1, rows, sort); 
+		} else { 
+			
+			pageRequest = new PageRequest(page - 1, rows); 
+		} 
+		Page<User> userPage = userService.findAllByPage(pageRequest); 
+		// Construct the grid data that will return as JSON data 
+		UserGrid userGrid = new UserGrid(); 
+		userGrid.setCurrentPage(userPage.getNumber() + 1); 
+		userGrid.setTotalPages(userPage.getTotalPages()); 
+		userGrid.setTotalRecords(userPage.getTotalElements()); 
+		userGrid.setUserData(Lists.newArrayList(userPage.iterator())); 
+		logger.info(userGrid.toString());
+		return userGrid;
 	}
 }

@@ -7,9 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/script/script.js"
-	type="text/javascript"></script>
 <title><tiles:insertAttribute name="title" ignore="true"/></title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/style.css"
