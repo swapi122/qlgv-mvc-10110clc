@@ -50,7 +50,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/admin/setdanhgia.jsp" />
 	</definition>
-
+	<definition extends="adminTemplate" name="admin/qluserlist">
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/admin/qluser.jsp" />
+	</definition>
 	<!-- logined Sinh Vien Template -->
 	<definition name="svTemplate" template="/WEB-INF/layout/adminlayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/headerlogined.jsp" />
