@@ -5,8 +5,6 @@
 <html xmlns:tiles="http://tiles.apache.org/tags-tiles">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <title><tiles:insertAttribute name="title" ignore="true"/></title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/style.css"
