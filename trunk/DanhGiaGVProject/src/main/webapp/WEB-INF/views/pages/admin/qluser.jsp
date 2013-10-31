@@ -34,7 +34,7 @@
 				width : 615,
 				caption : 'Danh Sách User',
 				onSelectRow : function(id) {
-					document.location.href ="${showContactUrl}/" + id;
+					document.location.href ="/giangvien/admin/user/" + id;
 				}
 			});
 		});

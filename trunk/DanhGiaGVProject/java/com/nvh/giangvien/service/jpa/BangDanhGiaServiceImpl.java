@@ -38,7 +38,6 @@ public class BangDanhGiaServiceImpl implements BangDanhGiaService {
 	public void delete(BangDanhGia dg) {
 		// TODO Auto-generated method stub
 		//xoa het cau hoi truoc
-		
 		bdgRepository.delete(dg);
 	}
 

@@ -3,6 +3,7 @@ package com.nvh.giangvien.controller;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -233,5 +234,12 @@ public class AdminController {
 		userGrid.setUserData(Lists.newArrayList(userPage.iterator()));
 		return userGrid;
 	}
-
+	
+	@RequestMapping(value = "user/{id}" , method = RequestMethod.GET)
+	public String getUserInfo(@PathVariable("id") String id ,Model model){
+		User user = userService.findById(id);
+		model.addAttribute("info", user);
+		logger.info("send user ");
+		return "admin/userinfo";
+	}
 }
