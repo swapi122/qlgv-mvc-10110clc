@@ -30,7 +30,7 @@ public class AccountController {
 		return "login";
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/wellcome",method = RequestMethod.POST)
 	public String handleLogin(@RequestParam String username,
 			@RequestParam String password, RedirectAttributes redirect,
 			HttpServletRequest request){

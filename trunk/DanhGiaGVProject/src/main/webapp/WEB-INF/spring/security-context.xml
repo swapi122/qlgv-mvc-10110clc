@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+						http://www.springframework.org/schema/security 
+						http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+	<http auto-config="true">
+		<intercept-url pattern="/giangvien" access="ROLE_GV"/>
+		<intercept-url pattern="/sinhvien" access="ROLE_USER"/>
+		<intercept-url pattern="/admin" access="ROLE_ADMIN"/>
+		<intercept-url pattern="/manager" access="ROLE_MANAGER"/>
+		
+		<form-login login-page="/login"
+			authentication-failure-url="/loginfail" default-target-url="/admin" />
+		<logout logout-success-url="/logout" />
+	</http>
+	<authentication-manager>
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+				
+				users-by-username-query="
+					select id,password 
+					from user where id=?" 
+				
+				authorities-by-username-query="
+					select u.id, ac.authority from user u, account ac 
+					where u.id = ac.user_id and u.id =?  " 
+					
+			/>
+		</authentication-provider>
+	</authentication-manager>
+</beans:beans> 
