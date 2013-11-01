@@ -21,3 +21,4 @@ var="jquery_ui_theme_css" />
 	href="${pageContext.request.contextPath}/resources/jqgrid/ui.jqgrid.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jqgrid/grid.locale-en.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jqgrid/jquery.jqGrid.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jqgrid/plugins/grid.addons.js" type="text/javascript"></script>
