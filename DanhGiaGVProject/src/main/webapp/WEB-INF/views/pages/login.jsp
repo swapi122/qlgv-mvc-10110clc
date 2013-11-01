@@ -1,14 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <div class="login">
-<form id="frmlogin" method="post" action='<c:url value="/login" />'>
+<form id="frmlogin" method="post" action='<c:url value="/j_spring_security_check" />'>
 	<fieldset>
 		<legend>Login</legend>
-		User Name : <input id="textbox" type="text" name="username"
+		User Name : <input id="textbox" type="text" name="j_username"
 			class="textfield"><br /> Password : <input id="textbox"
-			type="password" name="password" class="textfield"> <br />
+			type="password" name="j_password" class="textfield"> <br />
 		<br /> <input id="button" type="submit" class="btn_search"
 			value="Login">
 	</fieldset>

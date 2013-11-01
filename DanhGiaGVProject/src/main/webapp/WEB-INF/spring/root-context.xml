@@ -16,7 +16,7 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<description>Example configuration to get you started.</description>
-
+	<import resource="security-context.xml"/>
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName">
