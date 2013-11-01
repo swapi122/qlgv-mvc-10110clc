@@ -5,4 +5,7 @@
 -21/10 : Hoan chinh nang sua/update cho Cau Hoi va Bang Danh Gia.
 	 Hoan thanh chuc nang Cai dat bang danh gia(Admin co the chon bang danh gia de sinh vien thuc hien danh gia)
 	 Hoan thanh chuc nang load thoi khoa bieu, chon giangvien+monhoc ma sinh vien muon danh gia
+-27/10 : Hoan thanh chuc nang quan ly user.
+-29/10 : Update jqgrid cho chuc nang quan ly user.
+-1/11  : Bo sung tinh nang Security cho Application.(su dung Spring Security voi JPA)
 /***********************************************************************/
