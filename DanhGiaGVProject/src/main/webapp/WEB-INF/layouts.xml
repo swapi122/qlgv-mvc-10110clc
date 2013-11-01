@@ -7,10 +7,22 @@
 		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
 	</definition>
+	
 	<definition extends="default" name="login">
 		<put-attribute name="title" value="ĐĂNG NHẬP" />
 		<put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />
 	</definition>
+	
+	<definition extends="default" name="denied">
+		<put-attribute name="title" value="Denied" />
+		<put-attribute name="body" value="/WEB-INF/views/denied.jsp" />
+	</definition>
+	
+	<definition extends="default" name="logoutSuccess">
+		<put-attribute name="title" value="Logout" />
+		<put-attribute name="body" value="/WEB-INF/views/logout.jsp" />
+	</definition>
+	
 	<definition name="logined" template="/WEB-INF/layout/logined.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/headerlogined.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />

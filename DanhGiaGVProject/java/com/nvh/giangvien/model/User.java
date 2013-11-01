@@ -30,6 +30,7 @@ public class User implements Serializable {
 
 	private String id;
 	private boolean gioitinh;
+	private String password;
 	private String hoten;
 	private Date ngaysinh;
 	private String noisinh;
@@ -102,6 +103,15 @@ public class User implements Serializable {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	@Column(name = "PASSWORD")
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/*@OneToMany(mappedBy="sv" , cascade =CascadeType.ALL, orphanRemoval = true )

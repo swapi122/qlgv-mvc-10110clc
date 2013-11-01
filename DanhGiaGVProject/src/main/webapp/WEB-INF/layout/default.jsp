@@ -13,6 +13,16 @@
 
 <body style="background-image: url(${pageContext.request.contextPath}/resources/images/bgcongcuphai.png);">
 	<tiles:insertAttribute name="header" ignore="true" />
+	<header>
+		<div class="inside header">
+			<a id="logo" href="#"><span class="congthongtin">PM.ĐÁNH
+					GIÁ GIẢNG VIÊN</span><br />
+			<tiles:insertAttribute name="pageName" ignore="true" /><br /> <span>ĐẠI
+					HỌC SƯ PHẠM KỸ THUẬT TP. HỒ CHÍ MINH</span> <img
+				src="${pageContext.request.contextPath}/resources/images/logo_1.png"
+				border="0px" /></a>
+		</div>
+	</header>
 	<div class="main-content inside">
 		<maincontent> 
 		<!-- TemplateBeginEditable name="maincontent" -->

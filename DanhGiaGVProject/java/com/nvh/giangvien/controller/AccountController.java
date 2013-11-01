@@ -7,7 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +19,6 @@ import com.nvh.giangvien.model.User;
 import com.nvh.giangvien.service.UserService;
 
 @Controller
-@RequestMapping("/login")
 public class AccountController {
 	public static final String ACCOUNT_ATTRIBUTE = "account";
 	final Logger logger = LoggerFactory.getLogger(AccountController.class);
@@ -25,45 +26,74 @@ public class AccountController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String login() {
+	@RequestMapping(value = "logined" , method = RequestMethod.GET)
+	public String home(HttpSession model){
+		User user = userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
+		model.setAttribute(ACCOUNT_ATTRIBUTE, user);
+		String weblink = "redirect:/";
+		switch (user.getTypeaccount()) {
+		case 0:
+			weblink += "sinhvien";
+			break;
+		case 1:
+			weblink += "giangvien";
+			break;
+		case 2:
+			weblink += "manager";
+			break;
+		case 3:
+			weblink += "admin";
+			break;
+		}
+		return weblink;
+
+	}
+
+	@RequestMapping(value = "/login")
+	public String login(Model model, @RequestParam(required=false) String message) {
 		return "login";
 	}
 
-	@RequestMapping(value = "/wellcome",method = RequestMethod.POST)
-	public String handleLogin(@RequestParam String username,
-			@RequestParam String password, RedirectAttributes redirect,
-			HttpServletRequest request){
-		try {
-			User user = userService.findById(username);
-			request.getSession().setAttribute(ACCOUNT_ATTRIBUTE, user);
-			String weblink = "redirect:/";
-			switch (user.getTypeaccount()) {
-			case 0:
-				weblink += "sinhvien";
-				break;
-			case 1:
-				weblink += "giangvien";
-				break;
-			case 2:
-				weblink += "manager";
-				break;
-			case 3:
-				weblink += "admin";
-				break;
-			}
-			return weblink;
-		} catch (Exception e) {
-			// TODO: handle exception
-			redirect.addFlashAttribute("exception", e); 
-			return "redirect:/login"; 
-		}
-		
+	@RequestMapping(value = "/denied")
+	public String denied(){
+		return "denied";
+	}
+	
+	@RequestMapping(value = "/login/failure")
+	public String loginFailure(){
+		String message = "Đang nhập thất bại";
+		return "redirect:/login?message=" +message;
+	}
+	
+	@RequestMapping(value = "/logout/success")
+	public String logoutSuccess(){
+		String message = "Đang nhập thất bại";
+		return "logoutSuccess";
+	}
+	
+	@RequestMapping(value="/sinhvien")
+	public String getUserPage() {
+		return "sinhvien";
+	}
+	
+	@RequestMapping(value="/admin")
+	public String getAdminPage() {
+		return "admin";
+	}
+	
+	@RequestMapping(value="/giangvien")
+	public String getGVPage() {
+		return "giangvien";
+	}
+	
+	@RequestMapping(value="/manager")
+	public String getManagerPage() {
+		return "manager";
 	}
 
-	@RequestMapping(params = "logout", method = RequestMethod.GET)
-	public String handlerLogout(HttpSession session) {
-		session.invalidate();
+	@RequestMapping(value = "logout", method = RequestMethod.GET)
+	public String handlerLogout(HttpServletRequest request) {
+		request.getSession(false).invalidate();
 		return "login";
 	}
 }
