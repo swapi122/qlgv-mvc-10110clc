@@ -11,10 +11,12 @@
 				url : '/giangvien/admin/qlusergrid',
 				datatype : 'json',
 				mtype : 'GET',
-				colNames : [ 'ID', 'Họ Tên', 'Loại Tài Khoản' ],
-				colModel:[{name:'id', index:'id', width:100}, 
-				{name:'hoten', index:'hoten', width:150}, 
-				{name:'typeaccount', index:'typeaccount', width:100}],
+				colModel:[
+				          {name:'id', label: 'ID', formatter:'string', width: 200},
+				          {name:'hoten', label: 'Ho Tên', width: 300},
+				          {name:'typeaccount', label: 'Loại Tài Khoản', width: 200}
+				        ],
+				height: 'auto',
 				jsonReader : {
 					root : "userData",
 					page : "currentPage",
@@ -37,13 +39,26 @@
 					document.location.href ="/giangvien/admin/user/" + id;
 				}
 			});
+			$('#mysearch').jqGrid('filterGrid', '#list', { 
+	              filterModel: [
+	                {label: 'ID', name: 'id'},
+	                {label: 'Họ Tên', name: 'hoten'},
+	                {label: 'Loại Tài Khoản', name : 'typeaccount'}
+	              ],
+	              formtype: 'vertical',
+	              enableSearch: true,
+	              enableClear: true,
+	              autosearch: false
+	      });
 		});
 	</script>
-
 	<h2>Danh Sách User</h2>
-	<div id="jqgriddiv">
-		<table id="list" style="width: 617px">
-		</table>
+	 <div id="mysearch"><br/></div>
+    <br/>
+    <div style="margin-top: 15px">
+	<table id="list" >
+	<tr><td/></tr>
+	</table>
 	</div>
-	<div id="pager"></div>
+	<div id="pager" ></div>
 </div>
