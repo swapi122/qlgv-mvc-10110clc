@@ -13,10 +13,10 @@
 		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/home" access="hasRole('ROLE_USER')"/>
 		<intercept-url pattern="/denied" access="hasRole('ROLE_USER')"/>
-		<intercept-url pattern="/sinhvien" access="hasRole('ROLE_USER')"/>
-		<intercept-url pattern="/giangvien" access="hasRole('ROLE_GV')"/>
-		<intercept-url pattern="/manager" access="hasRole('ROLE_MANAGER')"/>
-		<intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/sinhvien*" access="hasRole('ROLE_USER')"/>
+		<intercept-url pattern="/giangvien*" access="hasRole('ROLE_GV')"/>
+		<intercept-url pattern="/manager*" access="hasRole('ROLE_MANAGER')"/>
+		<intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')"/>
 		
 		<form-login login-page="/login" 
 			authentication-failure-url="/login/failure" 
@@ -24,9 +24,8 @@
 		
 		<access-denied-handler error-page="/denied"/>
 		
-		<logout invalidate-session="true" 
-			logout-success-url="/logout/success" 
-			logout-url="/logout"/>
+		<logout invalidate-session="true"  logout-url="/logout"
+			logout-success-url="/logout/success"/>
 	</http>
 	<authentication-manager>
 		<authentication-provider user-service-ref="customUserDetailsService">

@@ -11,7 +11,7 @@
 	<hr />
 	<div id="ketqua">
 
-		<a href="#">
+		<a href="${pageContext.request.contextPath}/sinhvien">
 			<div class="row">Đánh Giá Giảng Viên</div>
 		</a> 
 

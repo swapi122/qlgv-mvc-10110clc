@@ -13,13 +13,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="BANGDANHGIA")
+@Table(name = "BANGDANHGIA")
 public class BangDanhGia implements Serializable {
 
 	private int id;
@@ -27,10 +30,11 @@ public class BangDanhGia implements Serializable {
 	private Set<BangDanhGiaKq> bangkqs = new HashSet<BangDanhGiaKq>();
 	private Set<CauHoi> cauhois = new HashSet<CauHoi>();
 	private Date ngaytao;
-	
+	private Set<LoaiCauHoi> lchs = new HashSet<LoaiCauHoi>();
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ID")
+	@Column(name = "ID")
 	public int getId() {
 		return id;
 	}
@@ -39,16 +43,16 @@ public class BangDanhGia implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name="TENBANG")
+	@Column(name = "TENBANG")
 	public String getTenbang() {
 		return tenbang;
 	}
-	
+
 	public void setTenbang(String tenbang) {
 		this.tenbang = tenbang;
 	}
-	
-	@OneToMany(mappedBy = "loaiBang" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.EAGER)
+
+	@OneToMany(mappedBy = "loaiBang", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	public Set<BangDanhGiaKq> getBangkqs() {
 		return bangkqs;
 	}
@@ -57,7 +61,8 @@ public class BangDanhGia implements Serializable {
 		this.bangkqs = bangkqs;
 	}
 
-	@OneToMany(mappedBy = "bang" ,cascade={CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE}, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "bang", cascade = { CascadeType.MERGE,
+			CascadeType.REFRESH, CascadeType.REMOVE }, orphanRemoval = true, fetch = FetchType.EAGER)
 	public Set<CauHoi> getCauhois() {
 		return cauhois;
 	}
@@ -65,7 +70,7 @@ public class BangDanhGia implements Serializable {
 	public void setCauhois(Set<CauHoi> cauhois) {
 		this.cauhois = cauhois;
 	}
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "NGAYTAO")
 	public Date getNgaytao() {
@@ -76,5 +81,16 @@ public class BangDanhGia implements Serializable {
 		this.ngaytao = ngaytao;
 	}
 
-	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "bdg_lch",
+		joinColumns = @JoinColumn(name = "IDDGB"), 
+		inverseJoinColumns = @JoinColumn(name = "IDLCH"))
+	public Set<LoaiCauHoi> getLchs() {
+		return lchs;
+	}
+
+	public void setLchs(Set<LoaiCauHoi> lchs) {
+		this.lchs = lchs;
+	}
+
 }
