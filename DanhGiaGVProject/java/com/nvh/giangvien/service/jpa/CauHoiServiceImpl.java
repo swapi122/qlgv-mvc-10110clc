@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.nvh.giangvien.model.BangDanhGia;
 import com.nvh.giangvien.model.CauHoi;
 import com.nvh.giangvien.model.LoaiCauHoi;
 import com.nvh.giangvien.repository.CauHoiRepository;
@@ -44,6 +45,12 @@ public class CauHoiServiceImpl implements CauHoiService {
 	@Override
 	public List<CauHoi> findByloaicau(LoaiCauHoi lch) {
 		return chRepository.findByloaicau(lch);
+	}
+
+	@Override
+	public List<CauHoi> findByBangDanhGia(BangDanhGia lch) {
+		// TODO Auto-generated method stub
+		return chRepository.findBybang(lch);
 	}
 
 }

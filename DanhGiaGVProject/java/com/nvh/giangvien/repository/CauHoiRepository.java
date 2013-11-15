@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import com.nvh.giangvien.model.BangDanhGia;
 import com.nvh.giangvien.model.CauHoi;
 import com.nvh.giangvien.model.LoaiCauHoi;
 
@@ -15,4 +16,6 @@ public interface CauHoiRepository extends CrudRepository<CauHoi, String> {
 	public CauHoi findById(@Param("id") String id);
 	
 	public List<CauHoi> findByloaicau(LoaiCauHoi lch);
+	
+	public List<CauHoi> findBybang(BangDanhGia lch);
 }

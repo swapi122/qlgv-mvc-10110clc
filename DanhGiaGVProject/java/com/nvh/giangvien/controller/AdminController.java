@@ -2,6 +2,8 @@ package com.nvh.giangvien.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -81,6 +83,9 @@ public class AdminController {
 		logger.info("Get " + id);
 		BangDanhGia bdg = dgService.findById(id);
 		List<LoaiCauHoi> lchs = lchService.findAll();
+		List<LoaiCauHoi> lchs1 = new ArrayList<LoaiCauHoi>(bdg.getLchs());
+		Collections.sort(lchs1);
+		model.addAttribute("lchs1",lchs1);
 		model.addAttribute("bangdanhgia", bdg);
 		model.addAttribute("dslch", lchs);
 		return "admin/showbang";
@@ -138,6 +143,8 @@ public class AdminController {
 		logger.info(request.getParameter("typequestion"));
 		LoaiCauHoi lch = lchService.findById(Integer.parseInt(request
 				.getParameter("typequestion")));
+		bdg.getLchs().add(lch);
+		lch.getBdgs().add(bdg);
 		ch.setLoaicau(lch);
 		chService.save(ch);
 		logger.info(ch.toString());

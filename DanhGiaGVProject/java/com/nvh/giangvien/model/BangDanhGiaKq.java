@@ -1,12 +1,14 @@
 package com.nvh.giangvien.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="BANGDANHGIA_KQ")
@@ -23,6 +27,7 @@ public class BangDanhGiaKq implements Serializable{
 	private int id;
 	private ThoiKhoaBieu monhocdg;
 	private BangDanhGia loaiBang;
+	private Date ngaytao;
 	private Set<CauHoiKq> cauhoikqs = new HashSet<CauHoiKq>();
 	
 	@Id
@@ -37,7 +42,7 @@ public class BangDanhGiaKq implements Serializable{
 	}
 
 	@OneToOne
-	@JoinColumn(name="ID")
+	@JoinColumn(name="THOIKHOABIEU_ID")
 	public ThoiKhoaBieu getMonhocdg() {
 		return monhocdg;
 	}
@@ -56,7 +61,7 @@ public class BangDanhGiaKq implements Serializable{
 		this.loaiBang = loaiBang;
 	}
 
-	@OneToMany(mappedBy="bangkq" ,cascade = CascadeType.ALL , orphanRemoval = true)
+	@OneToMany(mappedBy="bangkq" ,cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.EAGER)
 	public Set<CauHoiKq> getCauhoikqs() {
 		return cauhoikqs;
 	}
@@ -65,4 +70,14 @@ public class BangDanhGiaKq implements Serializable{
 		this.cauhoikqs = cauhoikqs;
 	}
 	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "NGAYTAO")
+	public Date getNgaytao() {
+		return ngaytao;
+	}
+
+	public void setNgaytao(Date ngaytao) {
+		this.ngaytao = ngaytao;
+	}
+
 }
