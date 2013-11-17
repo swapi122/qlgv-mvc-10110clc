@@ -5,6 +5,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <div class="content" >
+	<div class="site-map-path">
+		<a href="${pageContext.request.contextPath}/admin"><img
+			src="${pageContext.request.contextPath}/resources/images/home.png"
+			height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label> <a
+			class="focus" href="${pageContext.request.contextPath}/admin/qluserlist">Quản lý Users</a>
+		<hr class="line-header-padding" />
+	</div>
+
 	<script>
 		$(function() {
 			$("#list").jqGrid({
@@ -52,7 +60,6 @@
 	      });
 		});
 	</script>
-	<h2>Danh Sách User</h2>
 	 <div id="mysearch"><br/></div>
     <br/>
     <div style="margin-top: 15px">
