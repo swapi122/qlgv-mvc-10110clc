@@ -19,6 +19,13 @@ function setdanhgia(URL) {
 }
 </script>
 <div class="content">
+	<div class="site-map-path">
+		<a href="${pageContext.request.contextPath}/admin"><img
+			src="${pageContext.request.contextPath}/resources/images/home.png"
+			height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label> <a
+			class="focus" href="${pageContext.request.contextPath}/admin/setdanhgia">Cài đặt bảng đánh giá</a>
+		<hr class="line-header-padding" />
+	</div>
 	<div id="public">
 		Chọn bảng đánh giá : 
 		<select id="selectloai" style="width: 470px">

@@ -146,6 +146,8 @@ public class AdminController {
 		bdg.getLchs().add(lch);
 		lch.getBdgs().add(bdg);
 		ch.setLoaicau(lch);
+		lchService.save(lch);
+		dgService.save(bdg);
 		chService.save(ch);
 		logger.info(ch.toString());
 		return "redirect:/admin?qldg";

@@ -10,11 +10,27 @@ ul li {
 <c:choose>
 	<c:when test="${not empty error}">
 		<div class="content">
+			<div class="site-map-path">
+				<a href="${pageContext.request.contextPath}/admin"><img
+					src="${pageContext.request.contextPath}/resources/images/home.png"
+					height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label> <a
+					class="focus" href="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}">Đánh giá giảng viên</a>
+				<hr class="line-header-padding" />
+			</div>
 			<div id="private">Bạn chưa được quyền đánh giá giảng viên</div>
 		</div>
 	</c:when>
 	<c:otherwise>
-		<div class="content" style="height: 100px"><h2>Phiếu Đánh Giá Chất Lượng Giảng Viên Khoa Đào Tạo Chất Lượng Cao</h2></div>
+		<div class="content" style="height: 100px">
+			<div class="site-map-path">
+				<a href="${pageContext.request.contextPath}/admin"><img
+					src="${pageContext.request.contextPath}/resources/images/home.png"
+					height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label> <a
+					class="focus" href="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}">Đánh giá giảng viên</a>
+				<hr class="line-header-padding" />
+			</div>
+			<h2 style="float:left ; color: #1C407D;">Phiếu Đánh Giá Chất Lượng Giảng Viên Khoa Đào Tạo Chất Lượng Cao</h2>
+		</div>
 		<div class="content" style="width: 100%">
 			<form
 				action="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}"

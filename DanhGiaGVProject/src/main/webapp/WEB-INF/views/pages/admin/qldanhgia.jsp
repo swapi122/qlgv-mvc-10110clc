@@ -70,8 +70,41 @@ fieldset {
 			}
 		});
 
+		$("#dialog-form-create").dialog({
+			autoOpen : false,
+			height : 170,
+			width : 350,
+			modal : true,
+			buttons : {
+				"Tạo" : function() {
+					formData = $('#inputFormCreate').serialize();
+					$.ajax({
+						url : $("#inputFormCreate").attr("action"),
+						type : 'POST',
+						data : formData,
+						success : function() {
+							alert("Tạo thành công");
+							location.reload();
+						}
+					});
+					$(this).dialog("close");
+				},
+				Cancel : function() {
+					$(this).dialog("close");
+				}
+			},
+			close : function() {
+				allFields.val("").removeClass("ui-state-error");
+			}
+		});
 	});
 
+	function openDialogCreate() {
+		$("#inputFormCreate").attr("action",
+				"${pageContext.request.contextPath}/admin?form");
+		$("#dialog-form-create").dialog("open");
+	};
+	
 	function openDialog(id, content) {
 		$("#id").val(id);
 		$("#noidung").val(content);
@@ -88,7 +121,7 @@ fieldset {
 		class="focus" href="${pageContext.request.contextPath}/admin?qldg">Danh
 		Sách Bảng Đánh Giá</a>
 	<div class="add-course">
-		<a href="${pageContext.request.contextPath}/admin?form"><img
+		<a href="#" onclick="openDialogCreate()"><img
 			alt="Tạo Bảng Đánh Giá" title="Tạo bảng đánh giá." height="24"
 			width="24" border="0"
 			src="${pageContext.request.contextPath}/resources/images/add.png" /></a>
@@ -108,7 +141,17 @@ fieldset {
 				</fieldset>
 			</form>
 		</div>
-
+		
+		<div id="dialog-form-create" title="Tạo bảng đánh giá">
+			<form id="inputFormCreate" method="post">
+				<fieldset>
+					<label for="tenbang">Tên Bảng :</label> <input
+						type="text" name="tenbang" id="tenbang" value=""
+						class="text ui-widget-content ui-corner-all" />
+				</fieldset>
+			</form>
+		</div>
+		
 		<c:forEach var="bang" items="${danhsachdg}">
 			<div id="private">
 				<div id="row">Bảng : ${bang.id}</div>
