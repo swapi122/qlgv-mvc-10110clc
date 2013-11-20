@@ -115,23 +115,36 @@ function updateQuestion(idquestion,contentQuestion,idtype){
 					value="Thêm Câu Hỏi" />
 			</div>
 		</div>
-		<c:forEach items="${lchs1}" var="lch">
-			<div id="public" style="width: 600px">
-			<div id="row" style="font-weight: bold;">
-					Tiêu Chí ${lch.id} : ${lch.tenloai}
-			</div>
-			<c:forEach items="${lch.cauhois}" var="cauhoi">
-				<div id="private" style="width: 580px">
-					<div id="row" style="width: 570px">
-						${cauhoi.id} : ${cauhoi.noidung}
+		<c:choose>
+			<c:when test="${not empty lchs1}">
+				<c:forEach items="${lchs1}" var="lch">
+					<div id="public" style="width: 600px">
+					<div id="row" style="font-weight: bold;">
+							Tiêu Chí ${lch.id} : ${lch.tenloai}
 					</div>
-					<div id="row" align="right" style="width: 570px">
-						<input id="button" type="button" value="Sữa" onclick="updateQuestion('${cauhoi.id}','${cauhoi.noidung}','${cauhoi.loaicau.id}')" /> <input id="button"
-							type="button" value="Xóa" onclick="deleteQuestion('${pageContext.request.contextPath}/admin/question/${cauhoi.id}?bangid=${bangdanhgia.id}')" />
+					<c:forEach items="${lch.cauhois}" var="cauhoi">
+						<c:if test="${bangdanhgia.cauhois.contains(cauhoi)}">
+							<div id="private" style="width: 580px">
+								<div id="row" style="width: 570px">
+									${cauhoi.id} : ${cauhoi.noidung}
+								</div>
+								<div id="row" align="right" style="width: 570px">
+									<input id="button" type="button" value="Sữa" onclick="updateQuestion('${cauhoi.id}','${cauhoi.noidung}','${cauhoi.loaicau.id}')" /> <input id="button"
+										type="button" value="Xóa" onclick="deleteQuestion('${pageContext.request.contextPath}/admin/question/${cauhoi.id}?bangid=${bangdanhgia.id}')" />
+								</div>
+							</div>
+						</c:if>
+					</c:forEach>
+					</div>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<div id="private" >
+					<div id="row" style="width: 570px">
+						Phiếu đánh giá chưa tạo câu hỏi.
 					</div>
 				</div>
-			</c:forEach>
-			</div>
-		</c:forEach>
+			</c:otherwise>
+		</c:choose>
 	</c:if>
 </div>

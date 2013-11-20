@@ -1,28 +1,23 @@
 package com.nvh.giangvien.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.RequestWrapper;
 
-import org.hibernate.classic.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.common.collect.Lists;
-import com.google.gson.Gson;
 import com.nvh.applicationscope.BangDanhGiaChoose;
 import com.nvh.applicationscope.UserGrid;
 import com.nvh.giangvien.model.BangDanhGia;
@@ -69,7 +63,7 @@ public class AdminController {
 	public String login() {
 		return "admin";
 	}
-
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(params = "qldg", method = RequestMethod.GET)
 	public String quanlyDanhGia(HttpSession session) {
 		List<BangDanhGia> dgs = dgService.findAll();
@@ -77,7 +71,7 @@ public class AdminController {
 		session.setAttribute("danhsachdg", dgs);
 		return "admin/qldanhgia";
 	}
-
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showBang(@PathVariable("id") int id, Model model) {
 		logger.info("Get " + id);
@@ -85,12 +79,13 @@ public class AdminController {
 		List<LoaiCauHoi> lchs = lchService.findAll();
 		List<LoaiCauHoi> lchs1 = new ArrayList<LoaiCauHoi>(bdg.getLchs());
 		Collections.sort(lchs1);
+		
 		model.addAttribute("lchs1",lchs1);
 		model.addAttribute("bangdanhgia", bdg);
 		model.addAttribute("dslch", lchs);
 		return "admin/showbang";
 	}
-
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public String deleteBang(@PathVariable("id") int id, Model model) {
 		logger.info("Xoa " + id);
@@ -100,7 +95,7 @@ public class AdminController {
 		dgService.delete(bdg);
 		return "redirect:/admin?qldg";
 	}
-
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/{id}", params = "update", method = RequestMethod.POST)
 	public String updateBang(@PathVariable("id") int id,
 			HttpServletRequest request) {
@@ -110,7 +105,7 @@ public class AdminController {
 		dgService.save(bdg);
 		return "redirect:/admin?qldg";
 	}
-
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(params = "form", method = RequestMethod.POST)
 	public String themBang(HttpServletRequest request,
 			RedirectAttributes redirect) throws UnsupportedEncodingException {
@@ -199,7 +194,7 @@ public class AdminController {
 		choose.setId(id);
 		return "admin/setdanhgia";
 	}
-
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "qluserlist", method = RequestMethod.GET)
 	public String getUser() {
 		return "admin/qluserlist";
