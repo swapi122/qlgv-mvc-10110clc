@@ -50,19 +50,23 @@ ul li {
 				<c:forEach var="lch" items="${lchs}">
 					<div id="public" style="width: 860px">
 							<b><u>Tiêu Chí ${lch.id} </u> : ${lch.tenloai}</b>
-							<div id="row"><c:forEach var="cauhoi" items="${lch.cauhois}">
-									<div id="private" style="width: 830px">
-										<div id="row">${cauhoi.noidung}</div>
-										<div id="row">
-											<ul>
-												<li>A <input type="radio" value="A" name="${cauhoi.id}" /></li>
-												<li>B <input type="radio" value="B" name="${cauhoi.id}" /></li>
-												<li>C <input type="radio" value="C" name="${cauhoi.id}" /></li>
-												<li>D <input type="radio" value="D" name="${cauhoi.id}" /></li>
-											</ul>
+							<div id="row">
+								<c:forEach var="cauhoi" items="${lch.cauhois}">
+									<c:if test="${bangdanhgia.cauhois.contains(cauhoi)}">
+										<div id="private" style="width: 830px">
+											<div id="row">${cauhoi.noidung}</div>
+											<div id="row">
+												<ul>
+													<li>A <input type="radio" value="A" name="${cauhoi.id}" /></li>
+													<li>B <input type="radio" value="B" name="${cauhoi.id}" /></li>
+													<li>C <input type="radio" value="C" name="${cauhoi.id}" /></li>
+													<li>D <input type="radio" value="D" name="${cauhoi.id}" /></li>
+												</ul>
+											</div>
 										</div>
-									</div>
-								</c:forEach></div>
+									</c:if>
+								</c:forEach>
+							</div>
 					</div>
 				</c:forEach>
 				<div id="row" style="margin-top: 10px; width: 100%" align="right"><input id="button" type="submit" value="Hoàn Thành" /></div>
