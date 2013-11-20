@@ -53,5 +53,11 @@ public class CauHoiKq {
 	public void setCauhoi(CauHoi cauhoi) {
 		this.cauhoi = cauhoi;
 	}
+	@Override
+	public String toString() {
+		return "CauHoiKq [id=" + id + ", ketqua=" + ketqua + ", bangkq="
+				+ bangkq + ", cauhoi=" + cauhoi + "]";
+	}
+	
 	
 }

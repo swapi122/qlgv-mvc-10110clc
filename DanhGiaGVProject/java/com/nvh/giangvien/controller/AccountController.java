@@ -36,7 +36,7 @@ public class AccountController {
 			weblink += "sinhvien";
 			break;
 		case 1:
-			weblink += "giangvien";
+			weblink += "gvien";
 			break;
 		case 2:
 			weblink += "manager";

@@ -7,7 +7,11 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,6 +22,8 @@ public class MonHoc implements Serializable {
 	private String ID;
 	private	String tenMH;
 	private Set<ThoiKhoaBieu> thoikhoabieu = new HashSet<ThoiKhoaBieu>();
+	private Set<User> gvs = new HashSet<User>();
+	
 	@Id
 	@Column(name="ID")
 	public String getID() {
@@ -42,5 +48,17 @@ public class MonHoc implements Serializable {
 	public void setThoikhoabieu(Set<ThoiKhoaBieu> thoikhoabieu) {
 		this.thoikhoabieu = thoikhoabieu;
 	}
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "giangvien_monhoc" , 
+		joinColumns = @JoinColumn(name="IDMH") , 
+		inverseJoinColumns = @JoinColumn(name = "IDGV"))
+	public Set<User> getGvs() {
+		return gvs;
+	}
+	public void setGvs(Set<User> gvs) {
+		this.gvs = gvs;
+	}
+	
 	
 }

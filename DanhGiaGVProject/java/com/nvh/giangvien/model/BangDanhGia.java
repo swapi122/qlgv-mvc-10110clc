@@ -52,7 +52,7 @@ public class BangDanhGia implements Serializable {
 		this.tenbang = tenbang;
 	}
 
-	@OneToMany(mappedBy = "loaiBang", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "loaiBang", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	public Set<BangDanhGiaKq> getBangkqs() {
 		return bangkqs;
 	}

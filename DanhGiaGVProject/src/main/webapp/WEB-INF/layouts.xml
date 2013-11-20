@@ -128,4 +128,14 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/giangvien/giangvien.jsp" />
 	</definition>
+	
+	<definition extends="giangvienTemplate" name="kqdanhgia">
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/giangvien/kqdanhgia.jsp" />
+	</definition>
+	
+	<definition extends="giangvienTemplate" name="showkqdanhgia">
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/giangvien/showkqdanhgia.jsp" />
+	</definition>
 </tiles-definitions>
