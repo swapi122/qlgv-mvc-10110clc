@@ -11,7 +11,7 @@
 	<hr />
 	<div id="ketqua">
 
-		<a href="${pageContext.request.contextPath}/admin?qldg">
+		<a href="${pageContext.request.contextPath}/gvien/kqdanhgia">
 			<div class="row">Xem kết quả đánh giá</div>
 		</a>
 

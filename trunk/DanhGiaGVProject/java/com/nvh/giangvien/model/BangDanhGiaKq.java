@@ -40,7 +40,6 @@ public class BangDanhGiaKq implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	@OneToOne
 	@JoinColumn(name="THOIKHOABIEU_ID")
 	public ThoiKhoaBieu getMonhocdg() {

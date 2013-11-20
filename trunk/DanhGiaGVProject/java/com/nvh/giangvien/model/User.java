@@ -13,6 +13,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,7 +41,7 @@ public class User implements Serializable {
 	private int version;
 	private Set<ThoiKhoaBieu> thoikhoabieuSV = new HashSet<ThoiKhoaBieu>();
 	private Set<ThoiKhoaBieu> lichdayGV = new HashSet<ThoiKhoaBieu>();
-	
+	private Set<MonHoc> mhs = new HashSet<MonHoc>();
 	@Id
 	@Column(name = "ID")
 	public String getId() {
@@ -114,22 +117,16 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	/*@OneToMany(mappedBy="sv" , cascade =CascadeType.ALL, orphanRemoval = true )
-	public Set<ThoiKhoaBieu> getThoikhoabieuSV() {
-		return thoikhoabieuSV;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "giangvien_monhoc" , 
+		joinColumns = @JoinColumn(name="IDGV") , 
+		inverseJoinColumns = @JoinColumn(name = "IDMH"))
+	public Set<MonHoc> getMhs() {
+		return mhs;
 	}
 
-	public void setThoikhoabieuSV(Set<ThoiKhoaBieu> thoikhoabieuSV) {
-		this.thoikhoabieuSV = thoikhoabieuSV;
+	public void setMhs(Set<MonHoc> mhs) {
+		this.mhs = mhs;
 	}
-
-	@OneToMany(mappedBy="gv", cascade = CascadeType.ALL , orphanRemoval = true)
-	public Set<ThoiKhoaBieu> getLichdayGV() {
-		return lichdayGV;
-	}
-
-	public void setLichdayGV(Set<ThoiKhoaBieu> lichdayGV) {
-		this.lichdayGV = lichdayGV;
-	}*/
 	
 }

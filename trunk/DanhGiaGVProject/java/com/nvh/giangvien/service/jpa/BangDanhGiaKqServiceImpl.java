@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.nvh.giangvien.model.BangDanhGiaKq;
+import com.nvh.giangvien.model.ThoiKhoaBieu;
 import com.nvh.giangvien.repository.BangDanhGiaKqRepository;
 import com.nvh.giangvien.service.BangDanhGiaKqService;
 
@@ -38,6 +39,12 @@ public class BangDanhGiaKqServiceImpl implements BangDanhGiaKqService {
 	public void delete(BangDanhGiaKq ch) {
 		// TODO Auto-generated method stub
 		bdgkqRepository.delete(ch);
+	}
+
+	@Override
+	public BangDanhGiaKq findByMonhocdg(ThoiKhoaBieu tkb) {
+		// TODO Auto-generated method stub
+		return bdgkqRepository.findByMonhocdg(tkb);
 	}
 
 }

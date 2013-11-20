@@ -1,13 +1,18 @@
 package com.nvh.giangvien.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.DateFormatter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +23,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -200,6 +206,19 @@ public class AdminController {
 		return "admin/qluserlist";
 	}
 
+	@RequestMapping(value = "qluserlist", params="update", method = RequestMethod.POST)
+	public String updateUser(HttpServletRequest request, Model model) throws ParseException {
+		User user = userService.findById(request.getParameter("id"));
+		user.setHoten(request.getParameter("hoten"));
+		user.setGioitinh(Boolean.parseBoolean(request.getParameter("noisinh")));
+		user.setNgaysinh( new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ngaysinh")));
+		user.setTypeaccount(Integer.parseInt(request.getParameter("loaiaccount")));
+		userService.save(user);
+		model.addAttribute("info", user);
+		logger.info("send user ");
+		return "admin/userinfo";
+	}
+	
 	// load UI quan ly user
 	@RequestMapping(value = "qlusergrid", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody

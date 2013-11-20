@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.nvh.giangvien.model.MonHoc;
 import com.nvh.giangvien.model.ThoiKhoaBieu;
 import com.nvh.giangvien.model.User;
 import com.nvh.giangvien.repository.ThoiKhoaBieuRepository;
@@ -45,6 +46,18 @@ public class ThoiKhoaBieuServiceImpl implements ThoiKhoaBieuService {
 	public void delete(ThoiKhoaBieu tkb) {
 		// TODO Auto-generated method stub
 		tkbRepository.delete(tkb);
+	}
+
+	@Override
+	public List<ThoiKhoaBieu> findByGv(User user) {
+		// TODO Auto-generated method stub
+		return tkbRepository.findByGv(user);
+	}
+
+	@Override
+	public List<ThoiKhoaBieu> findByMonhoc(MonHoc mh) {
+		// TODO Auto-generated method stub
+		return tkbRepository.findByMonhoc(mh);
 	}
 
 }

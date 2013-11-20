@@ -1,6 +1,7 @@
 package com.nvh.giangvien.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ public class CauHoi implements Serializable{
 	private Set<CauHoiKq> kqs = new HashSet<CauHoiKq>();
 	private LoaiCauHoi loaicau;
 	
+
 	@Id
 	@Column(name="ID")
 	public String getId() {
