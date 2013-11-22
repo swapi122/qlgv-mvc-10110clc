@@ -43,7 +43,7 @@ ul li {
 											<div id="row">${cauhoi.noidung}</div>
 											<div id="row">
 												<ul>
-													<li>A : </li>
+													<li>A : ${numA}</li>
 													<li>B <input type="radio" value="B" name="${cauhoi.id}" /></li>
 													<li>C <input type="radio" value="C" name="${cauhoi.id}" /></li>
 													<li>D <input type="radio" value="D" name="${cauhoi.id}" /></li>
