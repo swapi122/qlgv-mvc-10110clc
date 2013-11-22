@@ -82,32 +82,47 @@ public class GiangVienController {
 
 		MonHoc mh = mhService.findById(id);
 		List<ThoiKhoaBieu> tkbs = tkbService.findByMonhoc(mh);
-
-		for (CauHoi cauHoi : bdg.getCauhois()) {
-			// tinh %a %b %c %d cua moi cau hoi
-			int numA = 0, numB = 0, numC = 0, numD = 0;
-			List<CauHoiKq> chkqs = chkqService.findByCauhoi(cauHoi);
-			for (CauHoiKq cauHoiKq : chkqs) {
-				if (tkbs.contains(cauHoiKq.getBangkq().getMonhocdg())) {
-					switch (cauHoiKq.getKetqua()) {
-					case 'A':
-						numA++;
-						break;
-					case 'B':
-						numB++;
-						break;
-					case 'C':
-						numC++;
-						break;
-					case 'D':
-						numD++;
-						break;
-					}
-				}
+		List<BangDanhGiaKq> dgkqs = new ArrayList<BangDanhGiaKq>();
+		for (ThoiKhoaBieu thoiKhoaBieu : tkbs) {
+			BangDanhGiaKq dgkq = null;
+			if((dgkq = dgkqService.findByMonhocdg(thoiKhoaBieu)) != null){
+				dgkqs.add(dgkq);
 			}
-
 		}
-
+		for (CauHoi cauHoi : bdg.getCauhois()) {
+			log.error("CauHoi  : " + cauHoi.getId());
+			Integer numA = 0, numB = 0, numC = 0, numD = 0;
+			List<CauHoiKq> chkqs = chkqService.findByCauhoi(cauHoi);
+			for (BangDanhGiaKq bangDanhGiaKq : dgkqs) {
+				//if (bangDanhGiaKq.getLoaiBang().getId() == bdg.getId()) {
+					// tinh %a %b %c %d cua moi cau hoi
+					
+					for (CauHoiKq cauHoiKq : chkqs) {
+							log.info("CauHoi kq : " + cauHoiKq.getKetqua());
+							switch (cauHoiKq.getKetqua()) {
+							case 'A':
+								numA++;
+								break;
+							case 'B':
+								numB++;
+								break;
+							case 'C':
+								numC++;
+								break;
+							case 'D':
+								numD++;
+								break;
+							}
+						log.info("Num A : " + numA);
+						log.info("Num B : " + numA);
+						log.info("Num C : " + numA);
+						log.info("Num D : " + numA);
+					}
+				//}
+			}
+		}
+		log.error("BangDanhGiakq  : " + dgkqs.toString());
+		log.info("TKB : " + tkbs.toString());
 		return "showkqdanhgia";
 	}
 

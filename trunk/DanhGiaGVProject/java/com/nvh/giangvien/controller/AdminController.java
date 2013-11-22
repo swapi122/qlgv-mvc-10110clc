@@ -1,18 +1,15 @@
 package com.nvh.giangvien.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.DateFormatter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -308,5 +305,25 @@ public class AdminController {
 		model.addAttribute("info", user);
 		logger.info("send user ");
 		return "admin/userinfo";
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "user" , method = RequestMethod.POST)
+	public String saveUser(Model model, HttpServletRequest request) throws ParseException{
+		try {
+			User user = new User(); 
+			user.setId(request.getParameter("id"));
+			user.setHoten(request.getParameter("hoten"));
+			user.setGioitinh(Boolean.parseBoolean(request.getParameter("noisinh")));
+			user.setNgaysinh( new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ngaysinh")));
+			user.setTypeaccount(Integer.parseInt(request.getParameter("loaiaccount")));
+			userService.save(user);
+			model.addAttribute("useradded", user);
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("ErrorAdd", "Không thể thêm được vì " + e.getMessage());
+		}
+		
+		return "admin/qluserlist";
 	}
 }
