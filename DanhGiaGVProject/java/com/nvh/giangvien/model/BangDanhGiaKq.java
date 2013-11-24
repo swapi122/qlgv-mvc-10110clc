@@ -28,6 +28,7 @@ public class BangDanhGiaKq implements Serializable{
 	private ThoiKhoaBieu monhocdg;
 	private BangDanhGia loaiBang;
 	private Date ngaytao;
+	
 	private Set<CauHoiKq> cauhoikqs = new HashSet<CauHoiKq>();
 	
 	@Id
@@ -79,4 +80,13 @@ public class BangDanhGiaKq implements Serializable{
 		this.ngaytao = ngaytao;
 	}
 
+	@Override
+	public String toString() {
+		return "BangDanhGiaKq [id=" + id + ", ngaytao=" + ngaytao
+				+ "]";
+	}
+
+
+
+	
 }

@@ -22,3 +22,5 @@ var="jquery_ui_theme_css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jqgrid/grid.locale-en.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jqgrid/jquery.jqGrid.js"></script>
 <script src="${pageContext.request.contextPath}/resources/jqgrid/plugins/grid.addons.js" type="text/javascript"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>

@@ -65,6 +65,12 @@ public class ThoiKhoaBieu implements Serializable {
 		this.monhoc = monhoc;
 	}
 
+	@Override
+	public String toString() {
+		return "ThoiKhoaBieu [id=" + id + ", sv=" + sv + ", gv=" + gv
+				+ ", monhoc=" + monhoc + "]";
+	}
+
 
 	
 }

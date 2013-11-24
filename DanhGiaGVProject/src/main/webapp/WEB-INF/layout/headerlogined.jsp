@@ -11,7 +11,7 @@
 				<p>Trang Chủ</p>
 			</a></li>
 			<li><a href="<c:url value="${pageContext.request.contextPath}/logout" />" > <br /> Thoát <br />
-					<span>(Chào: <%=((User)session.getAttribute("account")).getHoten()%>)<br /></span></a></li>
+					<span>(Chào: ${account.hoten})<br /></span></a></li>
 		</ul>
 	</div>
 </nav>
