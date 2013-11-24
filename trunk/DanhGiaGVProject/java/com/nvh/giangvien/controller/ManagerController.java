@@ -70,7 +70,7 @@ public class ManagerController {
 			} else {
 				hoten = "%" + hoten + "%";
 			}if(typeaccount == null){
-				typeaccount = 1;
+				typeaccount = 4;
 			}
 			SearchCriteria criteria = new SearchCriteria();
 			criteria.setId(id);
@@ -80,8 +80,6 @@ public class ManagerController {
 			// Process order by
 			Sort sort = null;
 			String orderBy = sortBy;
-			if (orderBy != null && orderBy.equals("typeaccount"))
-				orderBy = "typeaccount";
 			if (orderBy != null && order != null) {
 				if (order.equals("desc")) {
 					sort = new Sort(Sort.Direction.DESC, orderBy);

@@ -107,7 +107,7 @@ function comeback(){
 			<div id="row" style="width: 400px;"><b>Loại account</b> 
 			<c:choose>
 				<c:when test="${info.typeaccount == 0}"> : Sinh Viên</c:when>
-				<c:when test="${info.typeaccount == 1}"> : Giảng Viên</c:when>
+				<c:when test="${info.typeaccount == 4}"> : Giảng Viên</c:when>
 				<c:when test="${info.typeaccount == 2}"> : Manager</c:when>
 				<c:when test="${info.typeaccount == 3}"> : Admin</c:when> 
 			</c:choose>
