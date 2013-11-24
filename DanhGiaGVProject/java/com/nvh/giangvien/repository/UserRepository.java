@@ -16,6 +16,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, String>
 	@Query("select e from User e where e.id like :id and e.hoten like :hoten and e.typeaccount = :typeaccount")
 	public Page<User> findUserByCriteria(@Param("id") String id,
 			                               @Param("hoten") String hoten,
-			                               @Param("typeaccount") int typeAccount,
+			                               @Param("typeaccount") int typeaccount,
 			                               Pageable pageable);
 }
