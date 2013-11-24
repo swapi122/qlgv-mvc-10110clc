@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,13 +45,13 @@ public class SinhVienCotroller {
 
 	@Autowired
 	private CauHoiService chService;
-	
+
 	@Autowired
 	private CauHoiKqService chkqService;
-	
+
 	@Autowired
 	private LoaiCauHoiService lchService;
-	
+
 	@Autowired
 	private BangDanhGiaChoose choose;
 
@@ -58,48 +60,64 @@ public class SinhVienCotroller {
 
 	@Autowired
 	private BangDanhGiaKqService bdgkqService;
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String logined(Model model, HttpServletRequest request) {
 		// load tkb theo sinh vien do
-		User use = (User)request.getSession().getAttribute("account");
+		User use = (User) request.getSession().getAttribute("account");
 		List<ThoiKhoaBieu> tkbs = tkbService.findBySV(use);
 		model.addAttribute("tkblist", tkbs);
 		return "sinhvien";
 	}
 
 	@RequestMapping(value = "/danhgia/{id}", method = RequestMethod.GET)
-	public String danhgia(@PathVariable("id") int id, Model model) {
+	public String danhgia(@PathVariable("id") int id, Model model, HttpServletRequest request) {
 		log.info("Start Danh Gia" + id);
 		// lay bang danh gia hien tai
-		if(choose.getId() == 0 ){
-			model.addAttribute("error","Chưa được phép đánh giá");
+		if (choose.getId() == 0) {
+			model.addAttribute("error", "Chưa được phép đánh giá");
 			return "sinhviendgia";
 		}
-		BangDanhGia bdg = bdgService.findById(choose.getId());
-		List<LoaiCauHoi> lchs = new ArrayList<LoaiCauHoi>(bdg.getLchs());
-		Collections.sort(lchs);
-		model.addAttribute("lchs",lchs);
-		// gom nhom
-		ThoiKhoaBieu tkb = tkbService.findById(id);
-		model.addAttribute("thoikhoabieu",tkb);
-		model.addAttribute("bangdanhgia",bdg);
-		return "sinhviendgia";
+		BangDanhGiaKq dgkq = bdgkqService.findByMonhocdg(tkbService.findById(id));
+		if (dgkq == null) {
+			BangDanhGia bdg = bdgService.findById(choose.getId());
+			List<LoaiCauHoi> lchs = new ArrayList<LoaiCauHoi>(bdg.getLchs());
+			Collections.sort(lchs);
+			model.addAttribute("lchs", lchs);
+			// gom nhom
+			ThoiKhoaBieu tkb = tkbService.findById(id);
+			model.addAttribute("thoikhoabieu",tkb);
+			model.addAttribute("bangdanhgia", bdg);
+			return "sinhviendgia";
+		} else {
+			//da danh gia mon hoc nay roi
+			BangDanhGia bdg = bdgService.findById(choose.getId());
+			List<LoaiCauHoi> lchs = new ArrayList<LoaiCauHoi>(bdg.getLchs());
+			Collections.sort(lchs);
+			model.addAttribute("lchs", lchs);
+			// gom nhom
+			ThoiKhoaBieu tkb = tkbService.findById(id);
+			model.addAttribute("thoikhoabieu",tkb);
+			model.addAttribute("bangdanhgia", bdg);
+			model.addAttribute("bangdanhgiakq", dgkq);
+			log.info(dgkq.toString());
+			return "sinhviendgia";
+		}
 	}
-	
-	@RequestMapping(value = "/danhgia/{id}" , method = RequestMethod.POST)
-	public String luudanhgia(@PathVariable("id") int idBang,HttpServletRequest request){
-		int id  = Integer.parseInt(request.getParameter("idtkb"));
+
+	@RequestMapping(value = "/danhgia/{id}", method = RequestMethod.POST)
+	public String luudanhgia(@PathVariable("id") int idBang,
+			HttpServletRequest request) {
+		int id = Integer.parseInt(request.getParameter("idtkb"));
 		BangDanhGiaKq dgkq = new BangDanhGiaKq();
-		//tim loai bang dung de danh gia
+		// tim loai bang dung de danh gia
 		dgkq.setLoaiBang(bdgService.findById(idBang));
 		dgkq.setMonhocdg(tkbService.findById(id));
-		
+
 		dgkq.setNgaytao(new Date());
-		//luu ket qua bang danh gia
-		
-		
-		//luu cau hoi
+		// luu ket qua bang danh gia
+
+		// luu cau hoi
 		BangDanhGia lch = bdgService.findById(idBang);
 		List<CauHoi> chs = chService.findByBangDanhGia(lch);
 		for (CauHoi cauHoi : chs) {
@@ -110,6 +128,25 @@ public class SinhVienCotroller {
 			chkq.setKetqua(kq.charAt(0));
 			dgkq.getCauhoikqs().add(chkq);
 		}
+		bdgkqService.save(dgkq);
+		return "sinhvien";
+	}
+	
+	@RequestMapping(value = "/danhgia/{id}", params="update" ,method = RequestMethod.POST)
+	public String updatedanhgia(@PathVariable("id") int idBang,
+			HttpServletRequest request) {
+		int id = Integer.parseInt(request.getParameter("idtkb"));
+		BangDanhGiaKq dgkq = bdgkqService.findByMonhocdg(tkbService.findById(id));
+		// tim loai bang dung de danh gia
+
+		// luu cau hoi
+		for (CauHoiKq chkq : dgkq.getCauhoikqs()) {
+			//dgkq.getCauhoikqs().remove(chkq);
+			String kq = request.getParameter(String.valueOf(chkq.getId()));
+			chkq.setKetqua(kq.charAt(0));
+			chkqService.save(chkq);
+		}
+		dgkq.setNgaytao(new Date());
 		bdgkqService.save(dgkq);
 		return "sinhvien";
 	}

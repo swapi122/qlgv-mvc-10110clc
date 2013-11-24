@@ -32,6 +32,7 @@ import com.nvh.giangvien.service.BangDanhGiaService;
 import com.nvh.giangvien.service.CauHoiKqService;
 import com.nvh.giangvien.service.MonHocService;
 import com.nvh.giangvien.service.ThoiKhoaBieuService;
+import com.nvh.util.DisplayResult;
 
 @Controller
 public class GiangVienController {
@@ -75,54 +76,63 @@ public class GiangVienController {
 	public String showkqdanhgia(@PathVariable String id, Model model) {
 		// lay bang danh gia mau
 		BangDanhGia bdg = bdgService.findById(choose.getId());
+		if (bdg == null) {
+			model.addAttribute("message", "Chưa chọn bảng đánh giá");
+			return "kqdanhgia";
+		}
 		model.addAttribute("bangdanhgia", bdg);
 		List<LoaiCauHoi> lchs = new ArrayList<LoaiCauHoi>(bdg.getLchs());
 		Collections.sort(lchs);
 		model.addAttribute("lchs", lchs);
 
 		MonHoc mh = mhService.findById(id);
+		model.addAttribute("mh", mh);
 		List<ThoiKhoaBieu> tkbs = tkbService.findByMonhoc(mh);
 		List<BangDanhGiaKq> dgkqs = new ArrayList<BangDanhGiaKq>();
 		for (ThoiKhoaBieu thoiKhoaBieu : tkbs) {
 			BangDanhGiaKq dgkq = null;
-			if((dgkq = dgkqService.findByMonhocdg(thoiKhoaBieu)) != null){
+			if ((dgkq = dgkqService.findByMonhocdg(thoiKhoaBieu)) != null) {
 				dgkqs.add(dgkq);
 			}
 		}
+		List<DisplayResult> kqs = new ArrayList<DisplayResult>();
 		for (CauHoi cauHoi : bdg.getCauhois()) {
-			log.error("CauHoi  : " + cauHoi.getId());
-			Integer numA = 0, numB = 0, numC = 0, numD = 0;
-			List<CauHoiKq> chkqs = chkqService.findByCauhoi(cauHoi);
+			DisplayResult kq = new DisplayResult();
+			kq.setCh(cauHoi);
+			kq.setMch(cauHoi.getId());
+			int a = 0, b = 0, c = 0, d = 0;
 			for (BangDanhGiaKq bangDanhGiaKq : dgkqs) {
-				//if (bangDanhGiaKq.getLoaiBang().getId() == bdg.getId()) {
-					// tinh %a %b %c %d cua moi cau hoi
-					
-					for (CauHoiKq cauHoiKq : chkqs) {
-							log.info("CauHoi kq : " + cauHoiKq.getKetqua());
-							switch (cauHoiKq.getKetqua()) {
+				if (bangDanhGiaKq.getLoaiBang().getId() == bdg.getId()) {
+					for (CauHoiKq chkq : bangDanhGiaKq.getCauhoikqs()) {
+						if (chkq.getCauhoi().getId().equals(cauHoi.getId())) {
+							switch (chkq.getKetqua()) {
 							case 'A':
-								numA++;
+								a++;
 								break;
 							case 'B':
-								numB++;
+								b++;
 								break;
 							case 'C':
-								numC++;
+								c++;
 								break;
 							case 'D':
-								numD++;
+								d++;
 								break;
 							}
-						log.info("Num A : " + numA);
-						log.info("Num B : " + numA);
-						log.info("Num C : " + numA);
-						log.info("Num D : " + numA);
+						}
 					}
-				//}
+				}
 			}
+			kq.setNumA(((double) a / dgkqs.size()) * 100);
+			kq.setNumB(((double) b / dgkqs.size()) * 100);
+			kq.setNumC(((double) c / dgkqs.size()) * 100);
+			kq.setNumD(((double) d / dgkqs.size()) * 100);
+			kqs.add(kq);
 		}
 		log.error("BangDanhGiakq  : " + dgkqs.toString());
 		log.info("TKB : " + tkbs.toString());
+		log.info("bang ket qua : " + kqs.toString());
+		model.addAttribute("kqs", kqs);
 		return "showkqdanhgia";
 	}
 

@@ -13,7 +13,6 @@ function setdanhgia(URL) {
 		type : 'POST',
 		success : function(html) {
 			alert("Cài Đặt Thành Công");
-			location.reload();
 		}
 	});
 }

@@ -6,55 +6,86 @@
 ul li {
 	display: inline;
 }
-</style>
 
+.percent {
+	float: left;
+	display: block;
+	width: 191px;
+	height: 50px;
+	color: black;
+	background-color: #dddddd;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	border-left: 1px solid black;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 50px;
+}
+</style>
 <c:choose>
 	<c:when test="${not empty error}">
 		<div class="content">
 			<div class="site-map-path">
 				<a href="${pageContext.request.contextPath}/admin"><img
 					src="${pageContext.request.contextPath}/resources/images/home.png"
-					height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label> <a
-					class="focus" href="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}">Đánh giá giảng viên</a>
+					height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label>
+				<a class="focus"
+					href="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}">Đánh
+					giá giảng viên</a>
 				<hr class="line-header-padding" />
 			</div>
-			<div id="private">Bạn chưa được quyền đánh giá giảng viên</div>
 		</div>
 	</c:when>
 	<c:otherwise>
 		<div class="content" style="height: 100px">
 			<div class="site-map-path">
-				<a href="${pageContext.request.contextPath}/admin"><img
+				<a href="${pageContext.request.contextPath}/gvien/"><img
 					src="${pageContext.request.contextPath}/resources/images/home.png"
-					height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label> <a
-					class="focus" href="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}">Đánh giá giảng viên</a>
+					height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label>
+				<a 
+					href="${pageContext.request.contextPath}/gvien/kqdanhgia/">Môn giảng dạy</a> > 
+				<a class="focus"
+					href="${pageContext.request.contextPath}/gvien/kqdanhgia/${mh.tenMH}">Kết quả đánh giá</a>
 				<hr class="line-header-padding" />
 			</div>
-			<h2 style="float:left ; color: #1C407D;">Phiếu Đánh Giá Chất Lượng Giảng Viên Khoa Đào Tạo Chất Lượng Cao</h2>
+			<div id="private" style="margin-top: 0px">
+				<h2 style="float: left; color: #1C407D;">KẾT QUẢ ĐÁNH GIÁ</h2>
+				<span style="float: right; color: #1C407D; font-size: 14px;">
+					<u>Giảng Viên :</u> ${account.hoten} <br /> <br /> <u>Môn :</u>
+					${mh.tenMH}
+				</span>
+			</div>
 		</div>
 		<div class="content" style="width: 100%">
-				<c:forEach var="lch" items="${lchs}">
-					<div id="public" style="width: 860px">
-							<b><u>Tiêu Chí ${lch.id} </u> : ${lch.tenloai}</b>
-							<div id="row">
-								<c:forEach var="cauhoi" items="${lch.cauhois}">
-									<c:if test="${bangdanhgia.cauhois.contains(cauhoi)}">
-										<div id="private" style="width: 830px">
-											<div id="row">${cauhoi.noidung}</div>
-											<div id="row">
-												<ul>
-													<li>A : ${numA}</li>
-													<li>B <input type="radio" value="B" name="${cauhoi.id}" /></li>
-													<li>C <input type="radio" value="C" name="${cauhoi.id}" /></li>
-													<li>D <input type="radio" value="D" name="${cauhoi.id}" /></li>
-												</ul>
-											</div>
-										</div>
-									</c:if>
-								</c:forEach>
-							</div>
+			<c:forEach var="lch" items="${lchs}">
+				<div id="public" style="width: 860px">
+					<b><u>Tiêu Chí ${lch.id} </u> : ${lch.tenloai}</b>
+					<div id="row">
+						<c:forEach var="kq" items="${kqs}">
+							<c:if test="${lch.cauhois.contains(kq.ch)}">
+								<div id="private" style="width: 830px">
+									<div id="row">${kq.ch.noidung}</div>
+									<div id="row">
+										<ul
+											style="list-style-type: none; margin: 0; padding: 0; width: 800px">
+											<li style="background-color: #196EEE" class="percent">Rất
+												Tốt : ${kq.numA}%</li>
+											<li style="background-color: #DA4531" class="percent">Tốt
+												: ${kq.numB}%</li>
+											<li style="background-color: #FFB700" class="percent">Bình
+												Thường : ${kq.numC}%</li>
+											<li style="background-color: #009855" class="percent"
+												style="border-right : 1px solid black;">Chưa Tốt :
+												${kq.numD}%</li>
+										</ul>
+
+									</div>
+								</div>
+							</c:if>
+						</c:forEach>
 					</div>
-				</c:forEach>
+				</div>
+			</c:forEach>
 		</div>
 	</c:otherwise>
 </c:choose>
