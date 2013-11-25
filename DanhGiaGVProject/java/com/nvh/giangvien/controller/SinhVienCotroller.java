@@ -107,29 +107,38 @@ public class SinhVienCotroller {
 
 	@RequestMapping(value = "/danhgia/{id}", method = RequestMethod.POST)
 	public String luudanhgia(@PathVariable("id") int idBang,
-			HttpServletRequest request) {
-		int id = Integer.parseInt(request.getParameter("idtkb"));
-		BangDanhGiaKq dgkq = new BangDanhGiaKq();
-		// tim loai bang dung de danh gia
-		dgkq.setLoaiBang(bdgService.findById(idBang));
-		dgkq.setMonhocdg(tkbService.findById(id));
+			HttpServletRequest request, Model model) {
+		try {
+			int id = Integer.parseInt(request.getParameter("idtkb"));
+			BangDanhGiaKq dgkq = new BangDanhGiaKq();
+			// tim loai bang dung de danh gia
+			dgkq.setLoaiBang(bdgService.findById(idBang));
+			dgkq.setMonhocdg(tkbService.findById(id));
 
-		dgkq.setNgaytao(new Date());
-		// luu ket qua bang danh gia
+			dgkq.setNgaytao(new Date());
+			// luu ket qua bang danh gia
 
-		// luu cau hoi
-		BangDanhGia lch = bdgService.findById(idBang);
-		List<CauHoi> chs = chService.findByBangDanhGia(lch);
-		for (CauHoi cauHoi : chs) {
-			String kq = request.getParameter(cauHoi.getId());
-			CauHoiKq chkq = new CauHoiKq();
-			chkq.setBangkq(dgkq);
-			chkq.setCauhoi(cauHoi);
-			chkq.setKetqua(kq.charAt(0));
-			dgkq.getCauhoikqs().add(chkq);
+			// luu cau hoi
+			
+			BangDanhGia lch = bdgService.findById(idBang);
+			List<CauHoi> chs = chService.findByBangDanhGia(lch);
+			for (CauHoi cauHoi : chs) {
+				String kq = request.getParameter(cauHoi.getId());
+				CauHoiKq chkq = new CauHoiKq();
+				chkq.setBangkq(dgkq);
+				chkq.setCauhoi(cauHoi);
+				chkq.setKetqua(kq.charAt(0));
+				dgkq.getCauhoikqs().add(chkq);
+			}
+			bdgkqService.save(dgkq);
+			model.addAttribute("success", "Đánh giá lưu thành công!");
+			return "danhgiasuccess";
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("fail", "Đánh giá lưu không thành công!");
+			return "danhgiasuccess";
 		}
-		bdgkqService.save(dgkq);
-		return "sinhvien";
+		
 	}
 	
 	@RequestMapping(value = "/danhgia/{id}", params="update" ,method = RequestMethod.POST)

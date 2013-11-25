@@ -12,8 +12,12 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/style.css"
 	type="text/css" />
-
-
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/messi.css"
+	type="text/css" />
+<script
+	src="${pageContext.request.contextPath}/resources/script/messi.js"
+	type="text/javascript"></script>
 <tiles:insertAttribute name="addlib" ignore="true" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <jsp:directive.page contentType="text/html; charset=UTF-8" />
