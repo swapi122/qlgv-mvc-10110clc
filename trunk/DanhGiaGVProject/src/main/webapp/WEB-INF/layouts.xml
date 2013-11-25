@@ -94,6 +94,13 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/sinhvien/svdanhgia.jsp" />
 	</definition>
+	
+	<definition extends="svTemplate" name="danhgiasuccess">
+		<put-attribute name="title" value="Wellcome to Sinh Vien's Page" />
+		<put-attribute name="pageName" value="SINH VIÊN" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/sinhvien/danhgiasuccess.jsp" />
+	</definition>
 
 	<!-- logined Manager Template -->
 	<definition name="managerTemplate" template="/WEB-INF/layout/adminlayout.jsp">
