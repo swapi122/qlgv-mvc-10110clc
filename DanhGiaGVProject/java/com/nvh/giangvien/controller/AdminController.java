@@ -1,5 +1,6 @@
 package com.nvh.giangvien.controller;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,7 +11,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+import javax.validation.Valid;
 
+import org.apache.poi.util.ArrayUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.common.collect.Lists;
@@ -33,11 +38,13 @@ import com.nvh.applicationscope.BangDanhGiaChoose;
 import com.nvh.applicationscope.UserGrid;
 import com.nvh.giangvien.model.BangDanhGia;
 import com.nvh.giangvien.model.CauHoi;
+import com.nvh.giangvien.model.FileBean;
 import com.nvh.giangvien.model.LoaiCauHoi;
 import com.nvh.giangvien.model.SearchCriteria;
 import com.nvh.giangvien.model.User;
 import com.nvh.giangvien.service.BangDanhGiaService;
 import com.nvh.giangvien.service.CauHoiService;
+import com.nvh.giangvien.service.ImportService;
 import com.nvh.giangvien.service.LoaiCauHoiService;
 import com.nvh.giangvien.service.UserService;
 
@@ -61,6 +68,9 @@ public class AdminController {
 
 	@Autowired
 	private BangDanhGiaChoose choose;
+
+	@Autowired
+	private ImportService importService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String login() {
@@ -326,4 +336,25 @@ public class AdminController {
 		
 		return "admin/qluserlist";
 	}
+
+	private String saveDirectory = "E:/Upload/";
+	
+	@RequestMapping(value="upload",method = RequestMethod.POST)
+	public String handleFileUpload(HttpServletRequest request, 
+			@RequestParam CommonsMultipartFile[] fileUpload, Model model) throws Exception {
+		
+		System.out.println("description: " + request.getParameter("description"));
+		ArrayList<String> dups = null;
+		if (fileUpload != null && fileUpload.length > 0) {
+			for (CommonsMultipartFile aFile : fileUpload){
+				FileBean fb = new FileBean();
+				fb.setFileData(aFile);
+				dups = importService.importFile(fb);
+			}
+		}
+		model.addAttribute("dups", dups);
+		// returns to the view "Result"
+		return "admin/qluserlist";
+	}
+	
 }

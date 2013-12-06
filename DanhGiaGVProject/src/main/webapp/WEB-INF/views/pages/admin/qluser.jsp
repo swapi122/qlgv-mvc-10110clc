@@ -8,6 +8,7 @@
 .ui-pg-div {
 	width: 50px !important;
 }
+
 input.text,select {
 	margin-bottom: 12px;
 	width: 95%;
@@ -30,6 +31,11 @@ fieldset {
 }
 </style>
 <div class="content">
+	<c:if test="${not empty dups }">
+		<script>
+			TINY.box.show({html:'Trùng ID của những User : ${dups}!',animate:false,close:false,boxid:'error',top:5})
+		</script>
+	</c:if>
 	<div class="site-map-path">
 		<a href="${pageContext.request.contextPath}/admin"><img
 			src="${pageContext.request.contextPath}/resources/images/home.png"
@@ -147,9 +153,8 @@ fieldset {
 			});
 		});
 		function openDialog() {
-			$("#inputForm")
-					.attr("action",
-							"${pageContext.request.contextPath}/admin/user");
+			$("#inputForm").attr("action",
+					"${pageContext.request.contextPath}/admin/user");
 			$("#dialog-form").dialog("open");
 		};
 	</script>
@@ -158,12 +163,11 @@ fieldset {
 		<form id="inputForm" method="post">
 			<fieldset>
 				<label for="id">ID :</label> <input type="text" name="id" id="id"
-					class="text ui-widget-content ui-corner-all" 
-					value="" /> <label for="hoten">Họ Tên :</label> <input
-					type="text" name="hoten" id="hoten" value=""
-					class="text ui-widget-content ui-corner-all" /> <label
-					for="noisinh">Nơi Sinh :</label> <input type="text" name="noisinh"
-					id="noisinh" value=""
+					class="text ui-widget-content ui-corner-all" value="" /> <label
+					for="hoten">Họ Tên :</label> <input type="text" name="hoten"
+					id="hoten" value="" class="text ui-widget-content ui-corner-all" />
+				<label for="noisinh">Nơi Sinh :</label> <input type="text"
+					name="noisinh" id="noisinh" value=""
 					class="text ui-widget-content ui-corner-all" /> <label
 					for="ngaysinh">Ngày Sinh :</label> <input type="text"
 					name="ngaysinh" id="ngaysinh" value=""
@@ -181,6 +185,16 @@ fieldset {
 
 	<div id="mysearch">
 		<br />
+	</div>
+	<br />
+	<div id="private" style="width: 580px">
+		<div id="row" style="width: 580px">
+			<form id="updateForm" method="post" enctype="multipart/form-data"
+				action="/giangvien/admin/upload">
+				<label for="file"> Upload File chứa danh sách sinh viên</label> <input
+					type="file" name="fileUpload" size="50" /> <input type="submit" />
+			</form>
+		</div>
 	</div>
 	<br />
 	<div style="margin-top: 15px">
