@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <style>
 ul li {
 	display: inline;
@@ -67,16 +68,12 @@ ul li {
 									<div id="row">${kq.ch.noidung}</div>
 									<div id="row">
 										<ul
-											style="list-style-type: none; margin: 0; padding: 0; width: 800px">
-											<li style="background-color: #196EEE" class="percent">Rất
-												Tốt : ${kq.numA}%</li>
-											<li style="background-color: #DA4531" class="percent">Tốt
-												: ${kq.numB}%</li>
-											<li style="background-color: #FFB700" class="percent">Bình
-												Thường : ${kq.numC}%</li>
-											<li style="background-color: #009855" class="percent"
-												style="border-right : 1px solid black;">Chưa Tốt :
-												${kq.numD}%</li>
+											style="list-style-type: none; margin: 0; padding: 0; width: 830px">
+											<li style="background-color: #196EEE ; width: ${((kq.numA/100 * 800) == 0) ? 0 : (kq.numA/100 * 770)}" class="percent">${((kq.numA/100 * 750) == 0) ? "" : kq.noidungA}</li>
+											<li style="background-color: #DA4531 ; width: ${((kq.numB/100 * 800) == 0) ? 0 : (kq.numB/100 * 770)}" class="percent">${((kq.numB/100 * 750) == 0) ? "" : kq.noidungB}</li>
+											<li style="background-color: #FFB700 ; width: ${((kq.numC/100 * 800) == 0) ? 0 : (kq.numC/100 * 770)}" class="percent">${((kq.numC/100 * 750) == 0) ? "" : kq.noidungC}</li>
+											<li style="background-color: #009855 ; width: ${((kq.numD/100 * 800) == 0) ? 0 : (kq.numD/100 * 770)} " class="percent"
+												style="border-right : 1px solid black;">${((kq.numD/100 * 750) == 0) ? "" : kq.noidungD}</li>
 										</ul>
 
 									</div>

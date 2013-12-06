@@ -18,6 +18,9 @@
 <script
 	src="${pageContext.request.contextPath}/resources/script/messi.js"
 	type="text/javascript"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/script/tinybox.js"
+	type="text/javascript"></script>
 <tiles:insertAttribute name="addlib" ignore="true" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <jsp:directive.page contentType="text/html; charset=UTF-8" />
@@ -28,9 +31,9 @@
 	<header>
 		<div class="inside header">
 			<a id="logo" href="#"><span class="congthongtin">PM.ĐÁNH
-					GIÁ GIẢNG VIÊN</span><br />
-			<tiles:insertAttribute name="pageName" ignore="true" /><br /> <span>ĐẠI
-					HỌC SƯ PHẠM KỸ THUẬT TP. HỒ CHÍ MINH</span> <img
+					GIÁ GIẢNG VIÊN</span><br /> <tiles:insertAttribute name="pageName"
+					ignore="true" /><br /> <span>ĐẠI HỌC SƯ PHẠM KỸ THUẬT TP.
+					HỒ CHÍ MINH</span> <img
 				src="${pageContext.request.contextPath}/resources/images/logo_1.png"
 				border="0px" /></a>
 		</div>

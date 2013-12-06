@@ -16,7 +16,7 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<description>Example configuration to get you started.</description>
-	<import resource="security-context.xml"/>
+	<import resource="security-context.xml" />
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName">
@@ -35,6 +35,11 @@
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="emf" />
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10000000" />
 	</bean>
 
 
@@ -64,6 +69,6 @@
 		entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager" />
 
 	<bean id="choosebang" class="com.nvh.applicationscope.BangDanhGiaChoose">
-		
+
 	</bean>
 </beans>

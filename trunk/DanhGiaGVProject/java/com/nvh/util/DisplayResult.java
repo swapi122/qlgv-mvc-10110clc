@@ -10,6 +10,10 @@ public class DisplayResult {
 	private double numC;
 	private double numD;
 	private CauHoi ch;
+	private String noidungA;
+	private String noidungB;
+	private String noidungC;
+	private String noidungD;
 	
 	public double getNumA() {
 		return numA;
@@ -45,6 +49,31 @@ public class DisplayResult {
 	
 	
 	
+	
+	public String getNoidungA() {
+		return noidungA;
+	}
+	public void setNoidungA(String noidungA) {
+		this.noidungA = noidungA;
+	}
+	public String getNoidungB() {
+		return noidungB;
+	}
+	public void setNoidungB(String noidungB) {
+		this.noidungB = noidungB;
+	}
+	public String getNoidungC() {
+		return noidungC;
+	}
+	public void setNoidungC(String noidungC) {
+		this.noidungC = noidungC;
+	}
+	public String getNoidungD() {
+		return noidungD;
+	}
+	public void setNoidungD(String noidungD) {
+		this.noidungD = noidungD;
+	}
 	@Override
 	public String toString() {
 		return "DisplayResult [mch=" + mch + ", numA=" + numA + ", numB="

@@ -124,9 +124,13 @@ public class GiangVienController {
 				}
 			}
 			kq.setNumA(((double) a / dgkqs.size()) * 100);
+			kq.setNoidungA("Rất Tốt : " + kq.getNumA() + "%");
 			kq.setNumB(((double) b / dgkqs.size()) * 100);
+			kq.setNoidungB("Tốt : " + kq.getNumB() + "%");
 			kq.setNumC(((double) c / dgkqs.size()) * 100);
+			kq.setNoidungC("Bình Thường : " + kq.getNumC() + "%");
 			kq.setNumD(((double) d / dgkqs.size()) * 100);
+			kq.setNoidungD("Chưa Tốt : " + kq.getNumD() + "%");
 			kqs.add(kq);
 		}
 		log.error("BangDanhGiakq  : " + dgkqs.toString());
