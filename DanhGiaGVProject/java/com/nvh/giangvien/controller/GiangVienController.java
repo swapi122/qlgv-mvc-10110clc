@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.PathParam;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,16 +67,17 @@ public class GiangVienController {
 	public String kqdanhgia(HttpServletRequest request, Model model) {
 		User user = (User) request.getSession().getAttribute("account");
 		Set<MonHoc> mhs = user.getMhs();
-
+		List<BangDanhGia> dslchs = bdgService.findAll();
+		model.addAttribute("lchs", dslchs);
 		log.info(mhs.toString());
 		model.addAttribute("tkbs", mhs);
 		return "kqdanhgia";
 	}
 
-	@RequestMapping(value = "/gvien/kqdanhgia/{id}", method = RequestMethod.GET)
-	public String showkqdanhgia(@PathVariable String id, Model model) {
+	@RequestMapping(value = "/gvien/kqdanhgia/{id}",method = RequestMethod.GET)
+	public String showkqdanhgia(@PathVariable String id, Model model , HttpServletRequest request) {
 		// lay bang danh gia mau
-		BangDanhGia bdg = bdgService.findById(choose.getId());
+		BangDanhGia bdg = bdgService.findById(Integer.parseInt(request.getParameter("iddg")));
 		if (bdg == null) {
 			model.addAttribute("message", "Chưa chọn bảng đánh giá");
 			return "kqdanhgia";

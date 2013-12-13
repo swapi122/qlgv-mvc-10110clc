@@ -1,6 +1,8 @@
 package com.nvh.giangvien.service;
 
 
+import java.util.List;
+
 import org.springframework.data.domain.Page; 
 import org.springframework.data.domain.Pageable;
 
@@ -13,6 +15,8 @@ public interface UserService {
 
 	public User findById(String id);
 
+	public List<User> findByTypeAccount(int type);
+	
 	public User save(User contact);
 
 	public void delete(User contact);

@@ -68,7 +68,7 @@
 	<jpa:repositories base-package="com.nvh.giangvien.repository"
 		entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager" />
 
-	<bean id="choosebang" class="com.nvh.applicationscope.BangDanhGiaChoose">
-
-	</bean>
+	<bean id="choosebang" class="com.nvh.applicationscope.BangDanhGiaChoose"></bean>
+	<bean id="time" class="com.nvh.giangvien.model.TimeBean"></bean>
+	
 </beans>

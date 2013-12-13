@@ -1,20 +1,19 @@
 package com.nvh.giangvien.controller;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-import javax.validation.Valid;
 
-import org.apache.poi.util.ArrayUtil;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,6 +39,7 @@ import com.nvh.giangvien.model.CauHoi;
 import com.nvh.giangvien.model.FileBean;
 import com.nvh.giangvien.model.LoaiCauHoi;
 import com.nvh.giangvien.model.SearchCriteria;
+import com.nvh.giangvien.model.TimeBean;
 import com.nvh.giangvien.model.User;
 import com.nvh.giangvien.service.BangDanhGiaService;
 import com.nvh.giangvien.service.CauHoiService;
@@ -54,6 +53,9 @@ public class AdminController {
 
 	final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
+	@Autowired
+	private TimeBean time;
+	
 	@Autowired
 	private BangDanhGiaService dgService;
 
@@ -202,8 +204,15 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "setdanhgia/{id}", method = RequestMethod.POST)
-	public String setDanhGia(@PathVariable("id") int id, Model model) {
-		logger.info("Set Danh Gia");
+	public String setDanhGia(@PathVariable("id") int id, Model model, HttpServletRequest request) {
+		
+		String thoigianBD = request.getParameter("timebd");
+		String thoigianKT = request.getParameter("timekt");
+		DateTimeFormatter dateStringFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+		time.setTimeBD(dateStringFormat.parseDateTime(thoigianBD));
+		time.setTimeKT(dateStringFormat.parseDateTime(thoigianKT));
+		
+		logger.info("Set Danh Gia : " + time.getTimeBD().toString() + " | " + time.getTimeKT().toString());
 		choose.setId(id);
 		return "admin/setdanhgia";
 	}

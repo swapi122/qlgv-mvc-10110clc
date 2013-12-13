@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import com.nvh.giangvien.model.CauHoi;
 import com.nvh.giangvien.model.CauHoiKq;
 import com.nvh.giangvien.model.LoaiCauHoi;
 import com.nvh.giangvien.model.ThoiKhoaBieu;
+import com.nvh.giangvien.model.TimeBean;
 import com.nvh.giangvien.model.User;
 import com.nvh.giangvien.service.BangDanhGiaKqService;
 import com.nvh.giangvien.service.BangDanhGiaService;
@@ -40,6 +42,9 @@ public class SinhVienCotroller {
 
 	private Logger log = LoggerFactory.getLogger(SinhVienCotroller.class);
 
+	@Autowired
+	private TimeBean time;
+	
 	@Autowired
 	private ThoiKhoaBieuService tkbService;
 
@@ -73,10 +78,25 @@ public class SinhVienCotroller {
 	@RequestMapping(value = "/danhgia/{id}", method = RequestMethod.GET)
 	public String danhgia(@PathVariable("id") int id, Model model, HttpServletRequest request) {
 		log.info("Start Danh Gia" + id);
+		DateTime timeNow = new DateTime();
+		int result = timeNow.compareTo(time.getTimeBD());
+		log.info("Time BD : " + time.getTimeBD().toString() + " | Time KT : " + time.getTimeKT().toString());
 		// lay bang danh gia hien tai
 		if (choose.getId() == 0) {
-			model.addAttribute("error", "Chưa được phép đánh giá");
+			model.addAttribute("error", "Chưa có bảng đánh giá.");
 			return "sinhviendgia";
+		}
+		if(result <= 0){
+			model.addAttribute("error", "Chưa đến thời gian cho phép đánh giá");
+			return "sinhviendgia";
+		}else{
+			//sau khi thoi gian bd.
+			int resultKT = timeNow.compareTo(time.getTimeKT());
+			if(resultKT == 1){
+				//qua' han
+				model.addAttribute("error", "Đã quá hạn đăng ký!. Vui lòng quay lại sau!");
+				return "sinhviendgia";
+			}
 		}
 		BangDanhGiaKq dgkq = bdgkqService.findByMonhocdg(tkbService.findById(id));
 		if (dgkq == null) {

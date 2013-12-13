@@ -27,10 +27,10 @@ ul li {
 	<c:when test="${not empty error}">
 		<div class="content">
 			<div class="site-map-path">
-				<a href="${pageContext.request.contextPath}/admin"><img
+				<a href="${pageContext.request.contextPath}/manager"><img
 					src="${pageContext.request.contextPath}/resources/images/home.png"
 					height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label>
-				<a class="focus" href="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}">Đánh
+				<%-- <a class="focus" href="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}"> --%>Đánh
 					giá giảng viên</a>
 				<hr class="line-header-padding" />
 			</div>
@@ -44,15 +44,15 @@ ul li {
 					src="${pageContext.request.contextPath}/resources/images/home.png"
 					height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label>
 				<a 
-					href="${pageContext.request.contextPath}/gvien/kqdanhgia/">Môn giảng dạy</a> > 
+					href="${pageContext.request.contextPath}/manager/tracuugv">Tra cứu giảng viên</a> > 
 				<a class="focus"
-					href="${pageContext.request.contextPath}/gvien/kqdanhgia/${mh.tenMH}">Kết quả đánh giá</a>
+					href="${pageContext.request.contextPath}/manager/tracuugv/${gv.id}">Kết quả đánh giá ${gv.hoten}</a>
 				<hr class="line-header-padding" />
 			</div>
 			<div id="private" style="margin-top: 0px">
 				<h2 style="float: left; color: #1C407D;">KẾT QUẢ ĐÁNH GIÁ</h2>
 				<span style="float: right; color: #1C407D; font-size: 14px;">
-					<u>Giảng Viên :</u> ${account.hoten} <br /> <br /> <u>Môn :</u>
+					<u>Giảng Viên :</u> ${gv.hoten} <br /> <br /> <u>Môn :</u>
 					${mh.tenMH}
 				</span>
 			</div>

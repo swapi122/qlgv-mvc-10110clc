@@ -18,7 +18,7 @@ ul li {
 					giá giảng viên</a>
 				<hr class="line-header-padding" />
 			</div>
-			<div id="private">Bạn chưa được quyền đánh giá giảng viên</div>
+			<div id="private">${error}</div>
 		</div>
 	</c:when>
 	<c:otherwise>

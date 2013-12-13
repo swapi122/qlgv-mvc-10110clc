@@ -115,10 +115,21 @@
 	</definition>
 
 	<definition extends="managerTemplate" name="manager">
-		<put-attribute name="body"
-			value="/WEB-INF/views/pages/manager/manager.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/pages/manager/manager.jsp" />
 	</definition>
-
+	
+	<definition extends="managerTemplate" name="tracuugiangvien">
+		<put-attribute name="body" value="/WEB-INF/views/pages/manager/tracuugiangvien.jsp" />
+	</definition>
+	
+	<definition extends="managerTemplate" name="kqdanhgiaGV">
+		<put-attribute name="body" value="/WEB-INF/views/pages/manager/kqdanhgiaGV.jsp" />
+	</definition>
+	
+	<definition extends="managerTemplate" name="showkqdanhgiaGV">
+		<put-attribute name="body" value="/WEB-INF/views/pages/manager/showkqdanhgiaGV.jsp" />
+	</definition>
+	
 	<!-- logined Giang Vien Template -->
 	<definition name="giangvienTemplate" template="/WEB-INF/layout/adminlayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/headerlogined.jsp" />
