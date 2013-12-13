@@ -70,6 +70,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/admin/svinfo.jsp" />
 	</definition>
+	<definition extends="adminTemplate" name="quanlythongbao">
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/admin/qlthongbao.jsp" />
+	</definition>
+	
 	<!-- logined Sinh Vien Template -->
 	<definition name="svTemplate" template="/WEB-INF/layout/adminlayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/headerlogined.jsp" />
@@ -100,6 +105,20 @@
 		<put-attribute name="pageName" value="SINH VIÊN" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/sinhvien/danhgiasuccess.jsp" />
+	</definition>
+
+	<definition extends="svTemplate" name="infosinhvien">
+		<put-attribute name="title" value="Wellcome to Sinh Vien's Page" />
+		<put-attribute name="pageName" value="SINH VIÊN" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/sinhvien/infosinhvien.jsp" />
+	</definition>
+	
+	<definition extends="svTemplate" name="changepassword">
+		<put-attribute name="title" value="Wellcome to Sinh Vien's Page" />
+		<put-attribute name="pageName" value="SINH VIÊN" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/sinhvien/changePassword.jsp" />
 	</definition>
 
 	<!-- logined Manager Template -->

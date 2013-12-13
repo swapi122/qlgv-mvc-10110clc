@@ -1,5 +1,3 @@
-<%@page
-	import="org.apache.taglibs.standard.tag.common.core.ForEachSupport"%>
 <%@page import="org.springframework.ui.Model,java.util.List"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -60,9 +58,9 @@ fieldset {
 							url : $("#inputForm").attr("action"),
 							type : 'POST',
 							data : formData,
-							success : function() {
-								alert("Thêm thành công");
-								location.reload();
+							success : function(data) {
+								TINY.box.show({html: data,animate:false,close:false,boxid:'error',top:5})
+								//location.reload();
 							}
 						});
 						$(this).dialog("close");

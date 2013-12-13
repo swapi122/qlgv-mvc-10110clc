@@ -11,7 +11,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
@@ -39,12 +38,14 @@ import com.nvh.giangvien.model.CauHoi;
 import com.nvh.giangvien.model.FileBean;
 import com.nvh.giangvien.model.LoaiCauHoi;
 import com.nvh.giangvien.model.SearchCriteria;
+import com.nvh.giangvien.model.ThongBao;
 import com.nvh.giangvien.model.TimeBean;
 import com.nvh.giangvien.model.User;
 import com.nvh.giangvien.service.BangDanhGiaService;
 import com.nvh.giangvien.service.CauHoiService;
 import com.nvh.giangvien.service.ImportService;
 import com.nvh.giangvien.service.LoaiCauHoiService;
+import com.nvh.giangvien.service.ThongBaoService;
 import com.nvh.giangvien.service.UserService;
 
 @Controller
@@ -71,6 +72,9 @@ public class AdminController {
 	@Autowired
 	private BangDanhGiaChoose choose;
 
+	@Autowired
+	private ThongBaoService tbService;
+	
 	@Autowired
 	private ImportService importService;
 
@@ -211,7 +215,6 @@ public class AdminController {
 		DateTimeFormatter dateStringFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 		time.setTimeBD(dateStringFormat.parseDateTime(thoigianBD));
 		time.setTimeKT(dateStringFormat.parseDateTime(thoigianKT));
-		
 		logger.info("Set Danh Gia : " + time.getTimeBD().toString() + " | " + time.getTimeKT().toString());
 		choose.setId(id);
 		return "admin/setdanhgia";
@@ -226,12 +229,14 @@ public class AdminController {
 	public String updateUser(HttpServletRequest request, Model model) throws ParseException {
 		User user = userService.findById(request.getParameter("id"));
 		user.setHoten(request.getParameter("hoten"));
-		user.setGioitinh(Boolean.parseBoolean(request.getParameter("noisinh")));
+		user.setNoisinh(request.getParameter("noisinh"));
 		user.setNgaysinh( new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ngaysinh")));
 		user.setTypeaccount(Integer.parseInt(request.getParameter("loaiaccount")));
+		logger.info(user.toString());
 		userService.save(user);
 		model.addAttribute("info", user);
-		logger.info("send user ");
+		//update account sau khi update
+		model.addAttribute("user", user);
 		return "admin/userinfo";
 	}
 	
@@ -327,9 +332,14 @@ public class AdminController {
 	}
 	
 	@PreAuthorize("isAuthenticated()")
-	@RequestMapping(value = "user" , method = RequestMethod.POST)
-	public String saveUser(Model model, HttpServletRequest request) throws ParseException{
+	@RequestMapping(value = "user" , method = RequestMethod.POST , produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String saveUser(Model model, HttpServletRequest request) throws ParseException{
 		try {
+			if(userService.findById(request.getParameter("id"))!= null){
+				//da co user nay.
+				model.addAttribute("idtrung", request.getParameter("id"));
+				return "User đã tồn tại [id : " + request.getParameter("id") + "]" ;
+			}
 			User user = new User(); 
 			user.setId(request.getParameter("id"));
 			user.setHoten(request.getParameter("hoten"));
@@ -338,21 +348,16 @@ public class AdminController {
 			user.setTypeaccount(Integer.parseInt(request.getParameter("loaiaccount")));
 			userService.save(user);
 			model.addAttribute("useradded", user);
+			return "Thêm thành công";
 		} catch (Exception e) {
 			// TODO: handle exception
-			model.addAttribute("ErrorAdd", "Không thể thêm được vì " + e.getMessage());
-		}
-		
-		return "admin/qluserlist";
+			return "Không thể thêm được vì " + e.getMessage();
+		}		
 	}
-
-	private String saveDirectory = "E:/Upload/";
 	
 	@RequestMapping(value="upload",method = RequestMethod.POST)
 	public String handleFileUpload(HttpServletRequest request, 
 			@RequestParam CommonsMultipartFile[] fileUpload, Model model) throws Exception {
-		
-		System.out.println("description: " + request.getParameter("description"));
 		ArrayList<String> dups = null;
 		if (fileUpload != null && fileUpload.length > 0) {
 			for (CommonsMultipartFile aFile : fileUpload){
@@ -366,4 +371,25 @@ public class AdminController {
 		return "admin/qluserlist";
 	}
 	
+	//thong bao
+	@RequestMapping(value = "qlthongbao" , method = RequestMethod.GET)
+	public String getThongbao(Model model, HttpServletRequest request){
+		List<ThongBao> tbs = tbService.findAll();
+		model.addAttribute("tbs", tbs);
+		return "quanlythongbao";
+	}
+	
+	@RequestMapping(value = "qlthongbao" , method = RequestMethod.POST , produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String saveThongBao(HttpServletRequest request) throws ParseException{
+		if(tbService.findById(Integer.parseInt(request.getParameter("id")))!= null){
+			//da ton tai thong bao nay
+			return "Trùng id thông báo , vui lòng nhập ID khác!";
+		}
+		ThongBao tb = new ThongBao();
+		tb.setId(Integer.parseInt(request.getParameter("id")));
+		tb.setTenthongbao(request.getParameter("noidung"));
+		tb.setNgaytao(new Date());
+		tbService.save(tb);
+		return "Lưu thành công!";
+	}
 }

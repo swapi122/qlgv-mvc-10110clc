@@ -67,11 +67,10 @@ function comeback(){
 </script>
 <div class="content">
 	<div class="site-map-path">
-		<a href="${pageContext.request.contextPath}/admin"><img
+		<a href="${pageContext.request.contextPath}/sinhvien"><img
 			src="${pageContext.request.contextPath}/resources/images/home.png"
-			height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label> <a
-			class="focus" href="${pageContext.request.contextPath}/admin/qluserlist">Quản lý Users</a> &gt; <a class="focus"
-			href="${pageContext.request.contextPath}/admin/user/${info.id}">Thông tin User</a>
+			height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label> <a class="focus"
+			href="${pageContext.request.contextPath}/sinhvien/info">Thông tin cá nhân</a>
 		<hr class="line-header-padding" />
 	</div>
 	
@@ -79,42 +78,39 @@ function comeback(){
 			<form id="inputForm" method="post">
 				<fieldset>
 					<label for="id">ID :</label> 
-					<input type="text" name="id" id="id" class="text ui-widget-content ui-corner-all" readonly="readonly" value="${info.id}" /> 
+					<input type="text" name="id" id="id" class="text ui-widget-content ui-corner-all" readonly="readonly" value="${user.id}" /> 
 					<label for="hoten">Họ Tên :</label> 
-					<input type="text" name="hoten" id="hoten" value="${info.hoten}" class="text ui-widget-content ui-corner-all" />
+					<input type="text" name="hoten" id="hoten" value="${user.hoten}"	class="text ui-widget-content ui-corner-all" />
 					<label for="noisinh">Nơi Sinh :</label> 
-					<input type="text" name="noisinh" id="noisinh" value="${info.noisinh}"	class="text ui-widget-content ui-corner-all" />
+					<input type="text" name="noisinh" id="noisinh" value="${user.noisinh}"	class="text ui-widget-content ui-corner-all" />
 					<label for="ngaysinh">Ngày Sinh :</label> 
-					<input type="text" name="ngaysinh" id="ngaysinh" value="${info.ngaysinh}"	class="text ui-widget-content ui-corner-all" />
+					<input type="text" name="ngaysinh" id="ngaysinh" value="${user.ngaysinh}"	class="text ui-widget-content ui-corner-all" />
 					<label for="loaiaccount">Loai Account :</label> 
-					<select name="loaiaccount" id="loaiaccount" class="text ui-widget-content ui-corner-all" >
+					<select name="loaiaccount" id="loaiaccount" class="text ui-widget-content ui-corner-all">
 						<option value="0">Sinh Viên</option>
-						<option value="4">Giảng Viên</option>
-						<option value="2">Manager</option>
-						<option value="3">Admin</option>
 					</select>
 				</fieldset>
 			</form>
 		</div>
 	
 	<div id="public" style="position: relative; height: 200px">
-			<img style="border : 1px solid black ;position: absolute; top : 10px ; right: 30px ;width: 140px ; height : 160px ;" alt="anh sinh vien" src="http://online.hcmute.edu.vn/HinhSV/${info.id}.jpg">
+			<img style="border : 1px solid black ;position: absolute; top : 10px ; right: 30px ;width: 140px ; height : 160px ;" alt="anh sinh vien" src="http://online.hcmute.edu.vn/HinhSV/${user.id}.jpg">
 		<div style="width: 400px; position: absolute; ; top : 10px ; left: 10px">
-			<div id="row" style="width: 400px;"><b>ID :</b> ${info.id}</div>
-			<div id="row" style="width: 400px;"><b>Họ Tên</b> : ${info.hoten}</div>
-			<div id="row" style="width: 400px;"><b>Nơi Sinh</b> : ${info.noisinh}</div>
-			<div id="row" style="width: 400px;"><b>Ngày Sinh</b> : ${info.ngaysinh}</div>
+			<div id="row" style="width: 400px;"><b>ID :</b> ${user.id}</div>
+			<div id="row" style="width: 400px;"><b>Họ Tên</b> : ${user.hoten}</div>
+			<div id="row" style="width: 400px;"><b>Nơi Sinh</b> : ${user.noisinh}</div>
+			<div id="row" style="width: 400px;"><b>Ngày Sinh</b> : ${user.ngaysinh}</div>
 			<div id="row" style="width: 400px;"><b>Loại account</b> 
 			<c:choose>
-				<c:when test="${info.typeaccount == 0}"> : Sinh Viên</c:when>
-				<c:when test="${info.typeaccount == 4}"> : Giảng Viên</c:when>
-				<c:when test="${info.typeaccount == 2}"> : Manager</c:when>
-				<c:when test="${info.typeaccount == 3}"> : Admin</c:when> 
+				<c:when test="${user.typeaccount == 0}"> : Sinh Viên</c:when>
+				<c:when test="${user.typeaccount == 4}"> : Giảng Viên</c:when>
+				<c:when test="${user.typeaccount == 2}"> : Manager</c:when>
+				<c:when test="${user.typeaccount == 3}"> : Admin</c:when> 
 			</c:choose>
 			</div>
 		</div>
 		<div id="row" align="right" style="position: absolute; bottom: 10;">
-			<input id="button" type="button" value="Cập nhật" onclick="openDialog(${info.id})"/>
+			<input id="button" type="button" value="Cập nhật" onclick="openDialog(${account.id})"/>
 			<input id="button" type="button" value="Trở về" onclick="comeback()">
 		</div>
 	</div>
