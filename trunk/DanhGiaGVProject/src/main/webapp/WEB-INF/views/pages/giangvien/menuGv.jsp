@@ -14,7 +14,12 @@
 		<a href="${pageContext.request.contextPath}/gvien/kqdanhgia">
 			<div class="row">Xem kết quả đánh giá</div>
 		</a>
-
+		<a href="${pageContext.request.contextPath}/gvien">
+			<div class="row">Thông tin cá nhân</div>
+		</a>
+		<a href="${pageContext.request.contextPath}/gvien">
+			<div class="row">Đổi mật khẩu</div>
+		</a>
 	</div>
 	<br />
 </div>

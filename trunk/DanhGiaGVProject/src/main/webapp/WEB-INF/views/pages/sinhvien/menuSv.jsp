@@ -14,7 +14,12 @@
 		<a href="${pageContext.request.contextPath}/sinhvien">
 			<div class="row">Đánh Giá Giảng Viên</div>
 		</a> 
-
+		<a href="${pageContext.request.contextPath}/sinhvien/info?id=${account.id}">
+			<div class="row">Thông tin cá nhân</div>
+		</a>
+		<a href="${pageContext.request.contextPath}/changepwd">
+			<div class="row">Đổi mật khẩu</div>
+		</a>
 	</div>
 	<br />
 </div>

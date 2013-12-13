@@ -128,5 +128,14 @@ public class User implements Serializable {
 	public void setMhs(Set<MonHoc> mhs) {
 		this.mhs = mhs;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", gioitinh=" + gioitinh + ", password="
+				+ password + ", hoten=" + hoten + ", ngaysinh=" + ngaysinh
+				+ ", noisinh=" + noisinh + ", typeaccount=" + typeaccount
+				+ ", version=" + version + "]";
+	}
+
 	
 }

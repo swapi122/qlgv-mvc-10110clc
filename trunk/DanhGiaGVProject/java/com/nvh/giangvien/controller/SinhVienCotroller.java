@@ -35,6 +35,7 @@ import com.nvh.giangvien.service.CauHoiKqService;
 import com.nvh.giangvien.service.CauHoiService;
 import com.nvh.giangvien.service.LoaiCauHoiService;
 import com.nvh.giangvien.service.ThoiKhoaBieuService;
+import com.nvh.giangvien.service.UserService;
 
 @Controller
 @RequestMapping("/sinhvien")
@@ -65,6 +66,9 @@ public class SinhVienCotroller {
 
 	@Autowired
 	private BangDanhGiaKqService bdgkqService;
+	
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String logined(Model model, HttpServletRequest request) {
@@ -94,7 +98,7 @@ public class SinhVienCotroller {
 			int resultKT = timeNow.compareTo(time.getTimeKT());
 			if(resultKT == 1){
 				//qua' han
-				model.addAttribute("error", "Đã quá hạn đăng ký!. Vui lòng quay lại sau!");
+				model.addAttribute("error", "Đã quá hạn để đánh giá!. Vui lòng quay lại sau!");
 				return "sinhviendgia";
 			}
 		}
@@ -178,5 +182,12 @@ public class SinhVienCotroller {
 		dgkq.setNgaytao(new Date());
 		bdgkqService.save(dgkq);
 		return "sinhvien";
+	}
+	
+	@RequestMapping(value="/info", method = RequestMethod.GET)
+	public String getInfo(Model model, HttpServletRequest request){
+		User user = userService.findById(request.getParameter("id"));
+		model.addAttribute("user", user);
+		return "infosinhvien";
 	}
 }

@@ -17,6 +17,8 @@
 			<div class="row">Quản lý User</div>
 		</a> <a href="${pageContext.request.contextPath}/admin/setdanhgia">
 			<div class="row">Cài Đặt Đánh Giá</div>
+		</a><a href="${pageContext.request.contextPath}/admin/qlthongbao">
+			<div class="row">Quản lý và đăng thông báo</div>
 		</a>
 
 	</div>
