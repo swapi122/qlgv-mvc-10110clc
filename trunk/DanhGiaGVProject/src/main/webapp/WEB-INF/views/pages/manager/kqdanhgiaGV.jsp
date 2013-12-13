@@ -3,8 +3,8 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <script>
-function setURL(id){
-	$('#' + id).attr('href','${pageContext.request.contextPath}/gvien/kqdanhgia/' + id + '?iddg='+$("#selectloai").val());
+function setURL(id,gvid){
+	$('#' + id).attr('href','${pageContext.request.contextPath}/manager/kqdanhgiagv/' + gvid + '?iddg='+$("#selectloai").val()+'&mmh=' +id);
 }
 </script>
 <div class="content">
@@ -28,7 +28,7 @@ function setURL(id){
 			<div id="public">
 			Các môn đang giảng dạy :
 			<c:forEach items="${tkbs}" var="tkb">
-				<a id="${tkb.ID}" href="#" onclick="setURL('${tkb.ID}')">
+				<a id="${tkb.ID}" href="#" onclick="setURL('${tkb.ID}',${gv.id})">
 					<div id="private" style="width: 550px">
 						${tkb.tenMH}
 					</div>

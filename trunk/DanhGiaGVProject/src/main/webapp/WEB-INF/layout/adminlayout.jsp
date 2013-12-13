@@ -18,6 +18,12 @@
 <script
 	src="${pageContext.request.contextPath}/resources/script/messi.js"
 	type="text/javascript"></script>
+	
+<!-- date time picker -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/script/datetimepicker/jquery.datetimepicker.css"/>
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath}/resources/script/datetimepicker/jquery.js"></script>
+
 <script
 	src="${pageContext.request.contextPath}/resources/script/tinybox.js"
 	type="text/javascript"></script>

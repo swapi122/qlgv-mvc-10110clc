@@ -1,6 +1,8 @@
 package com.nvh.giangvien.repository;
 
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +20,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, String>
 			                               @Param("hoten") String hoten,
 			                               @Param("typeaccount") int typeaccount,
 			                               Pageable pageable);
+	
+	public List<User> findUserByTypeaccount(int type);
 }

@@ -11,7 +11,7 @@
 	<hr />
 	<div id="ketqua">
 
-		<a href="#">
+		<a href="${pageContext.request.contextPath}/manager/tracuugv">
 			<div class="row">Tra cứu giảng viên</div>
 		</a> <a href="#">
 			<div class="row">Tra cứu theo tiêu chí</div>

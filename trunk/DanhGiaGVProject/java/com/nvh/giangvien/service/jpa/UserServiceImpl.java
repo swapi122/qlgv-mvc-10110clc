@@ -57,4 +57,10 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findUserByCriteria(id, hoten, typeAccount, pageable);
 	}
 
+	@Override
+	public List<User> findByTypeAccount(int type) {
+		// TODO Auto-generated method stub
+		return userRepository.findUserByTypeaccount(type);
+	}
+
 }
