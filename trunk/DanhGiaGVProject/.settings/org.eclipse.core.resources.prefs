@@ -3,5 +3,7 @@ encoding//java/com/nvh/giangvien/controller/AccountController.java=UTF-8
 encoding//java/com/nvh/giangvien/controller/AdminController.java=UTF-8
 encoding//java/com/nvh/giangvien/controller/GiangVienController.java=UTF-8
 encoding//java/com/nvh/giangvien/controller/ManagerController.java=UTF-8
+encoding//java/com/nvh/giangvien/controller/RevenueReportController.java=UTF-8
 encoding//java/com/nvh/giangvien/controller/SinhVienCotroller.java=UTF-8
+encoding//java/com/nvh/util/ExcelRevenueReportView.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/pages/sinhvien/changePassword.jsp=UTF-8

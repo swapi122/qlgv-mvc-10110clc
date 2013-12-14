@@ -186,4 +186,5 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/giangvien/infogiangvien.jsp" />
 	</definition>
+	
 </tiles-definitions>
