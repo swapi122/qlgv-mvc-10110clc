@@ -1,7 +1,3 @@
-<%@page
-	import="org.apache.taglibs.standard.tag.common.core.ForEachSupport"%>
-<%@page import="com.nvh.giangvien.model.BangDanhGia"%>
-<%@page import="org.springframework.ui.Model,java.util.List"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -13,10 +9,9 @@
 
 		<a href="${pageContext.request.contextPath}/manager/tracuugv">
 			<div class="row">Tra cứu giảng viên</div>
-		</a> <a href="#">
-			<div class="row">Tra cứu theo tiêu chí</div>
+		</a> <a href="${pageContext.request.contextPath}/manager/tracuugv">
+			<div class="row">Tìm giảng viên</div>
 		</a>
-
 	</div>
 	<br />
 </div>

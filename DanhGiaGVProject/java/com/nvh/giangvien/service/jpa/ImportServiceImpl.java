@@ -48,28 +48,35 @@ public class ImportServiceImpl implements ImportService {
 			Sheet sheet = workbook.getSheetAt(0);
 			Iterator<Row> rowIterator = sheet.iterator();
 			while (rowIterator.hasNext()) {
-
 				Row row = rowIterator.next();
-				if (userService.findById(row.getCell(0).getStringCellValue()) != null) {
-					// da co user co id do.
-					dup.add(row.getCell(0).getStringCellValue());
-				} else {
-					User user = new User();
-					user.setId(row.getCell(0).getStringCellValue());
-					user.setHoten(row.getCell(1).getStringCellValue());
-					user.setNgaysinh(row.getCell(2).getDateCellValue());
-					user.setGioitinh(row.getCell(3).getBooleanCellValue());
-					user.setNoisinh(row.getCell(4).getStringCellValue());
-					user.setTypeaccount((int) row.getCell(5)
-							.getNumericCellValue());
-					user.setPassword(row.getCell(0).getStringCellValue());
-					userService.save(user);
+				try {
+					if (userService.findById(row.getCell(0).getStringCellValue()) != null) {
+						// da co user co id do.
+						dup.add(row.getCell(0).getStringCellValue());
+					} else {
+						User user = new User();
+						user.setId(row.getCell(0).getStringCellValue());
+						user.setHoten(row.getCell(1).getStringCellValue());
+						user.setNgaysinh(row.getCell(2).getDateCellValue());
+						user.setGioitinh(row.getCell(3).getBooleanCellValue());
+						user.setNoisinh(row.getCell(4).getStringCellValue());
+						user.setTypeaccount((int) row.getCell(5)
+								.getNumericCellValue());
+						user.setPassword(row.getCell(0).getStringCellValue());
+						userService.save(user);
+					}	
+				} catch (Exception e) {
+					// TODO: handle exception
+					ArrayList<String> error = new ArrayList<String>();
+					error.add("Cấu trúc file Excel không đúng! Vui lòng nhập lại");
+					return error;
 				}
 			}
 			return dup;
 		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
+			ArrayList<String> error = new ArrayList<String>();
+			error.add("Cấu trúc file Excel không đúng! Vui lòng nhập lại");
+			return error;
 		}
 	}
 

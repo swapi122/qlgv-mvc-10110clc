@@ -27,15 +27,19 @@ import com.nvh.giangvien.model.CauHoiKq;
 import com.nvh.giangvien.model.LoaiCauHoi;
 import com.nvh.giangvien.model.MonHoc;
 import com.nvh.giangvien.model.ThoiKhoaBieu;
+import com.nvh.giangvien.model.ThongBao;
 import com.nvh.giangvien.model.User;
 import com.nvh.giangvien.service.BangDanhGiaKqService;
 import com.nvh.giangvien.service.BangDanhGiaService;
 import com.nvh.giangvien.service.CauHoiKqService;
 import com.nvh.giangvien.service.MonHocService;
 import com.nvh.giangvien.service.ThoiKhoaBieuService;
+import com.nvh.giangvien.service.ThongBaoService;
+import com.nvh.giangvien.service.UserService;
 import com.nvh.util.DisplayResult;
 
 @Controller
+@RequestMapping("/gvien")
 public class GiangVienController {
 
 	@Autowired
@@ -58,12 +62,20 @@ public class GiangVienController {
 
 	private Logger log = LoggerFactory.getLogger(GiangVienController.class);
 
-	@RequestMapping(value = "/gvien", method = RequestMethod.GET)
-	public String logined() {
+	@Autowired
+	private ThongBaoService tbService;
+
+	@Autowired
+	private UserService userService;
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String logined(Model model) {
+		List<ThongBao> tkbs = tbService.findAll();
+		model.addAttribute("tblist", tkbs);
 		return "giangvien";
 	}
 
-	@RequestMapping(value = "/gvien/kqdanhgia", method = RequestMethod.GET)
+	@RequestMapping(value = "kqdanhgia", method = RequestMethod.GET)
 	public String kqdanhgia(HttpServletRequest request, Model model) {
 		User user = (User) request.getSession().getAttribute("account");
 		Set<MonHoc> mhs = user.getMhs();
@@ -74,7 +86,7 @@ public class GiangVienController {
 		return "kqdanhgia";
 	}
 
-	@RequestMapping(value = "/gvien/kqdanhgia/{id}",method = RequestMethod.GET)
+	@RequestMapping(value = "kqdanhgia/{id}",method = RequestMethod.GET)
 	public String showkqdanhgia(@PathVariable String id, Model model , HttpServletRequest request) {
 		// lay bang danh gia mau
 		BangDanhGia bdg = bdgService.findById(Integer.parseInt(request.getParameter("iddg")));
@@ -140,6 +152,13 @@ public class GiangVienController {
 		log.info("bang ket qua : " + kqs.toString());
 		model.addAttribute("kqs", kqs);
 		return "showkqdanhgia";
+	}
+	
+	@RequestMapping(value="/info", method = RequestMethod.GET)
+	public String getInfo(Model model, HttpServletRequest request){
+		User user = userService.findById(request.getParameter("id"));
+		model.addAttribute("user", user);
+		return "infogiangvien";
 	}
 
 }
