@@ -23,6 +23,11 @@ ul li {
 	line-height: 50px;
 }
 </style>
+<script>
+function printResult(){
+	
+}
+</script>
 <c:choose>
 	<c:when test="${not empty error}">
 		<div class="content">
@@ -54,7 +59,9 @@ ul li {
 				<h2 style="float: left; color: #1C407D;">
 					KẾT QUẢ ĐÁNH GIÁ <br />
 					<br />
-					<input id="button" type="button" onclick="" value="Xuất báo cáo" />
+					<a href="${pageContext.request.contextPath}/download?iddg=${bangdanhgia.id}&mh=${mh.ID}" >
+						Xuất báo cáo
+					</a>
 				</h2>
 
 				<span style="float: right; color: #1C407D; font-size: 14px;">

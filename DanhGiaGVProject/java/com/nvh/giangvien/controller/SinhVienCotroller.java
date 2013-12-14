@@ -95,6 +95,10 @@ public class SinhVienCotroller {
 	public String danhgia(@PathVariable("id") int id, Model model, HttpServletRequest request) {
 		log.info("Start Danh Gia" + id);
 		DateTime timeNow = new DateTime();
+		if(time.getTimeBD() == null || time.getTimeKT() == null){
+			model.addAttribute("error", "Chưa có thông báo về việc đánh giá!. Vui lòng chờ");
+			return "sinhviendgia";
+		}
 		int result = timeNow.compareTo(time.getTimeBD());
 		log.info("Time BD : " + time.getTimeBD().toString() + " | Time KT : " + time.getTimeKT().toString());
 		// lay bang danh gia hien tai
