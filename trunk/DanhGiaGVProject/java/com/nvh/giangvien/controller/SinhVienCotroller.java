@@ -27,6 +27,7 @@ import com.nvh.giangvien.model.CauHoi;
 import com.nvh.giangvien.model.CauHoiKq;
 import com.nvh.giangvien.model.LoaiCauHoi;
 import com.nvh.giangvien.model.ThoiKhoaBieu;
+import com.nvh.giangvien.model.ThongBao;
 import com.nvh.giangvien.model.TimeBean;
 import com.nvh.giangvien.model.User;
 import com.nvh.giangvien.service.BangDanhGiaKqService;
@@ -35,6 +36,7 @@ import com.nvh.giangvien.service.CauHoiKqService;
 import com.nvh.giangvien.service.CauHoiService;
 import com.nvh.giangvien.service.LoaiCauHoiService;
 import com.nvh.giangvien.service.ThoiKhoaBieuService;
+import com.nvh.giangvien.service.ThongBaoService;
 import com.nvh.giangvien.service.UserService;
 
 @Controller
@@ -70,15 +72,25 @@ public class SinhVienCotroller {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String logined(Model model, HttpServletRequest request) {
-		// load tkb theo sinh vien do
-		User use = (User) request.getSession().getAttribute("account");
-		List<ThoiKhoaBieu> tkbs = tkbService.findBySV(use);
-		model.addAttribute("tkblist", tkbs);
-		return "sinhvien";
-	}
+	@Autowired
+	private ThongBaoService tbService;
 
+	@RequestMapping(method = RequestMethod.GET)
+	public String logined(Model model) {
+		// load tkb theo sinh vien do
+		List<ThongBao> tkbs = tbService.findAll();
+		model.addAttribute("tblist", tkbs);
+		return "indexsv";
+	}
+	
+	@RequestMapping(value="dggv", method = RequestMethod.GET)
+	public String danhgiaGV(HttpServletRequest request, Model model){
+		User use = (User) request.getSession().getAttribute("account");
+		List<ThoiKhoaBieu> tkb = tkbService.findBySV(use);
+		model.addAttribute("tkblist", tkb);
+		return "sinhvien";
+	} 
+	
 	@RequestMapping(value = "/danhgia/{id}", method = RequestMethod.GET)
 	public String danhgia(@PathVariable("id") int id, Model model, HttpServletRequest request) {
 		log.info("Start Danh Gia" + id);

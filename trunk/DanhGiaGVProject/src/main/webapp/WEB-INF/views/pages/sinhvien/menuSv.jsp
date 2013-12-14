@@ -11,7 +11,7 @@
 	<hr />
 	<div id="ketqua">
 
-		<a href="${pageContext.request.contextPath}/sinhvien">
+		<a href="${pageContext.request.contextPath}/sinhvien/dggv">
 			<div class="row">Đánh Giá Giảng Viên</div>
 		</a> 
 		<a href="${pageContext.request.contextPath}/sinhvien/info?id=${account.id}">

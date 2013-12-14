@@ -34,11 +34,13 @@ import com.nvh.giangvien.model.LoaiCauHoi;
 import com.nvh.giangvien.model.MonHoc;
 import com.nvh.giangvien.model.SearchCriteria;
 import com.nvh.giangvien.model.ThoiKhoaBieu;
+import com.nvh.giangvien.model.ThongBao;
 import com.nvh.giangvien.model.User;
 import com.nvh.giangvien.service.BangDanhGiaKqService;
 import com.nvh.giangvien.service.BangDanhGiaService;
 import com.nvh.giangvien.service.MonHocService;
 import com.nvh.giangvien.service.ThoiKhoaBieuService;
+import com.nvh.giangvien.service.ThongBaoService;
 import com.nvh.giangvien.service.UserService;
 import com.nvh.util.DisplayResult;
 
@@ -62,9 +64,13 @@ public class ManagerController {
 
 	@Autowired
 	private BangDanhGiaKqService dgkqService;
+	@Autowired
+	private ThongBaoService tbService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String logined() {
+	public String logined(Model model) {
+		List<ThongBao> tkbs = tbService.findAll();
+		model.addAttribute("tblist", tkbs);
 		return "manager";
 	}
 	

@@ -50,7 +50,11 @@ ul li {
 				<hr class="line-header-padding" />
 			</div>
 			<div id="private" style="margin-top: 0px">
-				<h2 style="float: left; color: #1C407D;">KẾT QUẢ ĐÁNH GIÁ</h2>
+				<h2 style="float: left; color: #1C407D;">
+					KẾT QUẢ ĐÁNH GIÁ <br />
+					<br />
+					<input id="button" type="button" onclick="" value="Xuất báo cáo" />
+				</h2>
 				<span style="float: right; color: #1C407D; font-size: 14px;">
 					<u>Giảng Viên :</u> ${gv.hoten} <br /> <br /> <u>Môn :</u>
 					${mh.tenMH}

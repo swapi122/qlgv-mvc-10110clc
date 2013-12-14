@@ -59,8 +59,7 @@ fieldset {
 							type : 'POST',
 							data : formData,
 							success : function(data) {
-								TINY.box.show({html: data,animate:false,close:false,boxid:'error',top:5})
-								//location.reload();
+								TINY.box.show({html: data,animate:false,close:false,boxid:'error',top:230});
 							}
 						});
 						$(this).dialog("close");

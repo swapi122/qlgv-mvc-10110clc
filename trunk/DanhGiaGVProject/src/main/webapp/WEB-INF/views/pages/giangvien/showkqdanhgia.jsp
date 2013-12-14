@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <style>
 ul li {
 	display: inline;
@@ -30,7 +30,8 @@ ul li {
 				<a href="${pageContext.request.contextPath}/admin"><img
 					src="${pageContext.request.contextPath}/resources/images/home.png"
 					height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label>
-				<a class="focus" href="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}">Đánh
+				<a class="focus"
+					href="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}">Đánh
 					giá giảng viên</a>
 				<hr class="line-header-padding" />
 			</div>
@@ -43,14 +44,19 @@ ul li {
 				<a href="${pageContext.request.contextPath}/gvien/"><img
 					src="${pageContext.request.contextPath}/resources/images/home.png"
 					height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label>
-				<a 
-					href="${pageContext.request.contextPath}/gvien/kqdanhgia/">Môn giảng dạy</a> > 
-				<a class="focus"
-					href="${pageContext.request.contextPath}/gvien/kqdanhgia/${mh.tenMH}">Kết quả đánh giá</a>
+				<a href="${pageContext.request.contextPath}/gvien/kqdanhgia/">Môn
+					giảng dạy</a> > <a class="focus"
+					href="${pageContext.request.contextPath}/gvien/kqdanhgia/${mh.tenMH}">Kết
+					quả đánh giá</a>
 				<hr class="line-header-padding" />
 			</div>
 			<div id="private" style="margin-top: 0px">
-				<h2 style="float: left; color: #1C407D;">KẾT QUẢ ĐÁNH GIÁ</h2>
+				<h2 style="float: left; color: #1C407D;">
+					KẾT QUẢ ĐÁNH GIÁ <br />
+					<br />
+					<input id="button" type="button" onclick="" value="Xuất báo cáo" />
+				</h2>
+
 				<span style="float: right; color: #1C407D; font-size: 14px;">
 					<u>Giảng Viên :</u> ${account.hoten} <br /> <br /> <u>Môn :</u>
 					${mh.tenMH}
@@ -69,11 +75,18 @@ ul li {
 									<div id="row">
 										<ul
 											style="list-style-type: none; margin: 0; padding: 0; width: 830px">
-											<li style="background-color: #196EEE ; width: ${((kq.numA/100 * 800) == 0) ? 0 : (kq.numA/100 * 770)}" class="percent">${((kq.numA/100 * 750) == 0) ? "" : kq.noidungA}</li>
-											<li style="background-color: #DA4531 ; width: ${((kq.numB/100 * 800) == 0) ? 0 : (kq.numB/100 * 770)}" class="percent">${((kq.numB/100 * 750) == 0) ? "" : kq.noidungB}</li>
-											<li style="background-color: #FFB700 ; width: ${((kq.numC/100 * 800) == 0) ? 0 : (kq.numC/100 * 770)}" class="percent">${((kq.numC/100 * 750) == 0) ? "" : kq.noidungC}</li>
-											<li style="background-color: #009855 ; width: ${((kq.numD/100 * 800) == 0) ? 0 : (kq.numD/100 * 770)} " class="percent"
-												style="border-right : 1px solid black;">${((kq.numD/100 * 750) == 0) ? "" : kq.noidungD}</li>
+											<li
+												style="background-color: #196EEE ; width: ${((kq.numA/100 * 800) == 0) ? 0 : (kq.numA/100 * 770)}"
+												class="percent">${((kq.numA/100 * 750) == 0) ? "" : kq.noidungA}</li>
+											<li
+												style="background-color: #DA4531 ; width: ${((kq.numB/100 * 800) == 0) ? 0 : (kq.numB/100 * 770)}"
+												class="percent">${((kq.numB/100 * 750) == 0) ? "" : kq.noidungB}</li>
+											<li
+												style="background-color: #FFB700 ; width: ${((kq.numC/100 * 800) == 0) ? 0 : (kq.numC/100 * 770)}"
+												class="percent">${((kq.numC/100 * 750) == 0) ? "" : kq.noidungC}</li>
+											<li
+												style="background-color: #009855 ; width: ${((kq.numD/100 * 800) == 0) ? 0 : (kq.numD/100 * 770)} "
+												class="percent" style="border-right : 1px solid black;">${((kq.numD/100 * 750) == 0) ? "" : kq.noidungD}</li>
 										</ul>
 
 									</div>
