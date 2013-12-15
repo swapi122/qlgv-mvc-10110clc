@@ -6,6 +6,33 @@ ul li {
 	display: inline;
 }
 </style>
+<script>
+	var checkNames = new Array();
+	var num = 0;
+	var result = new Array();
+	function isValidForm() {
+		var resultBool = true;
+		for ( var i = 0; i < checkNames.length; i++) {
+			$("." + checkNames[i]).css("background-color", "#DFE4EE");
+			result[i] = new Array(4);
+			var flag = false;
+			for ( var j = 0; j < 4; j++) {
+				result[i][j] = document.getElementsByName(checkNames[i])[j].checked;
+				if (result[i][j] == true) {
+					flag = true;
+					break;
+				}
+			}
+			if (flag == false) {
+				//co 1 check box chua dc check
+				$("." + checkNames[i]).css("background-color", "red");
+				$("." + checkNames[i]).css("box-shadow", "10px 10px 5px #888888");			
+				resultBool = false;
+			}
+		}
+		return resultBool;
+	}
+</script>
 <c:choose>
 	<c:when test="${not empty error}">
 		<div class="content">
@@ -32,14 +59,17 @@ ul li {
 					giá giảng viên</a>
 				<hr class="line-header-padding" />
 			</div>
-			<h2 style="float: left; color: #1C407D;">Phiếu Đánh Giá Chất
-				Lượng Giảng Viên Khoa Đào Tạo Chất Lượng Cao</h2>
+			<div id="private">
+				<h2 style="float: left; color: #1C407D;">Phiếu Đánh Giá Chất
+					Lượng Giảng Viên Khoa Đào Tạo Chất Lượng Cao</h2>
+			</div>
 		</div>
 		<c:choose>
 			<c:when test="${not empty bangdanhgiakq }">
 				<!-- da danh gia roi, gio show ket qua danh gia lan truoc -->
 				<div class="content" style="width: 100%">
-					<form id="#inputForm" method="post" action="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}?update">
+					<form id="#inputForm" method="post"
+						action="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}?update">
 						<div id="public" style="width: 860px">
 							<div id="row">
 								<b>${bangdanhgia.tenbang}</b>
@@ -122,7 +152,7 @@ ul li {
 				<div class="content" style="width: 100%">
 					<form
 						action="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}"
-						method="post" onsubmit="return checkButons(this);">
+						method="post" onsubmit="return isValidForm(this)">
 						<div id="public" style="width: 860px">
 							<div id="row">
 								<b>${bangdanhgia.tenbang}</b>
@@ -141,7 +171,7 @@ ul li {
 								<div id="row">
 									<c:forEach var="cauhoi" items="${lch.cauhois}">
 										<c:if test="${bangdanhgia.cauhois.contains(cauhoi)}">
-											<div id="private" style="width: 830px">
+											<div id="private" style="width: 830px" class="${cauhoi.id}">
 												<div id="row">${cauhoi.noidung}</div>
 												<div id="row">
 													<ul>
@@ -153,6 +183,10 @@ ul li {
 															name="${cauhoi.id}" /></li>
 														<li>Chưa Tốt <input type="radio" value="D"
 															name="${cauhoi.id}" /></li>
+														<script>
+															checkNames[num] = "${cauhoi.id}";
+															num++;
+														</script>
 													</ul>
 												</div>
 											</div>

@@ -22,7 +22,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "BANGDANHGIA")
+@Table(name = "bangdanhgia")
 public class BangDanhGia implements Serializable {
 
 	private int id;
