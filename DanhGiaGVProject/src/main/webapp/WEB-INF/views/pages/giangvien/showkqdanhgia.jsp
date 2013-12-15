@@ -59,7 +59,7 @@ function printResult(){
 				<h2 style="float: left; color: #1C407D;">
 					KẾT QUẢ ĐÁNH GIÁ <br />
 					<br />
-					<a href="${pageContext.request.contextPath}/download?iddg=${bangdanhgia.id}&mh=${mh.ID}" >
+					<a href="${pageContext.request.contextPath}/download?iddg=${bangdanhgia.id}&mh=${mh.ID}&iduser=${account.id}" >
 						Xuất báo cáo
 					</a>
 				</h2>
