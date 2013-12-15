@@ -31,7 +31,7 @@ fieldset {
 <div class="content">
 	<c:if test="${not empty dups }">
 		<script>
-			TINY.box.show({html:'Trùng ID của những User : ${dups}!',animate:false,close:false,boxid:'error',top:5})
+			TINY.box.show({html:'Trùng ID của những User : ${dups}!',animate:false,close:false,boxid:'error',top:200});
 		</script>
 	</c:if>
 	<div class="site-map-path">
@@ -39,8 +39,7 @@ fieldset {
 			src="${pageContext.request.contextPath}/resources/images/home.png"
 			height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label> <a
 			class="focus"
-			href="${pageContext.request.contextPath}/admin/qluserlist">Quản
-			lý Users</a>
+			href="${pageContext.request.contextPath}/admin/qluserlist">Quản lý Users</a>
 		<hr class="line-header-padding" />
 	</div>
 

@@ -1,9 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <div class="login">
+<c:if test="${not empty error}">
+	<script>
+		TINY.box.show({html:'${error}!',animate:true,close:false,boxid:'error',top:200});
+	</script>
+</c:if>
 <form id="frmlogin" method="post" action='<c:url value="/j_spring_security_check" />'>
 	<fieldset>
 		<legend>Login</legend>

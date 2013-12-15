@@ -62,15 +62,18 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = "/login/failure")
-	public String loginFailure(){
-		String message = "Đang nhập thất bại";
-		return "redirect:/login?message=" +message;
+	public String loginFailure(Model model){
+		String message = "Đăng nhập thất bại";
+		logger.info("fail");
+		model.addAttribute("error", message);
+		return "login";
 	}
 	
 	@RequestMapping(value = "/logout/success")
-	public String logoutSuccess(){
-		String message = "Đang nhập thất bại";
-		return "logoutSuccess";
+	public String logoutSuccess(Model model){
+		String message = "Đang xuất thành công!";
+		model.addAttribute("error", message);
+		return "login";
 	}
 	
 	@RequestMapping(value="/sinhvien")

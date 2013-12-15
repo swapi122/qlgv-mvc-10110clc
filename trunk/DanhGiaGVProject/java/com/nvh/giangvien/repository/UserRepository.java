@@ -22,4 +22,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, String>
 			                               Pageable pageable);
 	
 	public List<User> findUserByTypeaccount(int type);
+	
+	public List<User> findByIdOrHoten(String id, String hoten);
 }

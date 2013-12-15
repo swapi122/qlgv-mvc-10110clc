@@ -63,4 +63,10 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findUserByTypeaccount(type);
 	}
 
+	@Override
+	public List<User> findByIdAndHoten(String id, String hoten) {
+		// TODO Auto-generated method stub
+		return userRepository.findByIdOrHoten(id, hoten);
+	}
+
 }
