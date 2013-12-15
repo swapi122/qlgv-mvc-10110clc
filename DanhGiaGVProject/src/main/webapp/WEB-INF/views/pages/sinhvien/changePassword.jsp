@@ -23,11 +23,11 @@
 					pwdnew : $("#mkmoi").val()
 				},
 				success : function(data) {
-					alert(data);
+					TINY.box.show({html:data,animate:false,close:false,boxid:'error',top:200});
 				}
 			});
 		}else{
-			alert("Mật khẩu nhập lại không trùng với mật khẩu mới");
+			TINY.box.show({html:'Mật khẩu nhập lại không trùng với mật khẩu mới',animate:false,close:false,boxid:'error',top:200});
 		}
 	};
 </script>

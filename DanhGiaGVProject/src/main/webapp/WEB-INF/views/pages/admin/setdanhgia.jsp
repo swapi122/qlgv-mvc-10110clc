@@ -15,7 +15,7 @@
 					},
 					type : 'POST',
 					success : function(html) {
-						alert("Cài Đặt Thành Công");
+						TINY.box.show({html:'Cài Đặt Thành Công!',animate:true,close:true,boxid:'error',top:200});
 					}
 				});
 			}

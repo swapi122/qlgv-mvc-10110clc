@@ -10,16 +10,19 @@
 	
 	<definition extends="default" name="login">
 		<put-attribute name="title" value="ĐĂNG NHẬP" />
+		<put-attribute name="pageName" value="ĐỒ ÁN CUỐI KÌ BỘ MÔN CÔNG NGHÊ PHẦN MỀM" />
 		<put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />
 	</definition>
 	
 	<definition extends="default" name="denied">
 		<put-attribute name="title" value="Denied" />
+		<put-attribute name="pageName" value="ĐỒ ÁN CUỐI KÌ BỘ MÔN CÔNG NGHÊ PHẦN MỀM" />
 		<put-attribute name="body" value="/WEB-INF/views/denied.jsp" />
 	</definition>
 	
 	<definition extends="default" name="logoutSuccess">
 		<put-attribute name="title" value="Logout" />
+		<put-attribute name="pageName" value="ĐỒ ÁN CUỐI KÌ BỘ MÔN CÔNG NGHÊ PHẦN MỀM" />
 		<put-attribute name="body" value="/WEB-INF/views/logout.jsp" />
 	</definition>
 	
@@ -154,6 +157,9 @@
 	
 	<definition extends="managerTemplate" name="showkqdanhgiaGV">
 		<put-attribute name="body" value="/WEB-INF/views/pages/manager/showkqdanhgiaGV.jsp" />
+	</definition>
+	<definition extends="managerTemplate" name="timkiemgiangvien">
+		<put-attribute name="body" value="/WEB-INF/views/pages/manager/timkiemgiangvien.jsp" />
 	</definition>
 	
 	<!-- logined Giang Vien Template -->

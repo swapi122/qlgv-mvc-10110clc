@@ -42,8 +42,11 @@ $(function() {
 					type : 'POST',
 					data : formData,
 					success : function() {
-						alert("Update thành công");
-						location.reload();
+						TINY.box.show({html:'Cập nhật Thành Công!',animate:true,close:true,boxid:'error',top:200});
+						var millisecondsToWait = 1000;
+						setTimeout(function() {
+							location.reload();
+						}, millisecondsToWait); 
 					}
 				});
 				$(this).dialog("close");

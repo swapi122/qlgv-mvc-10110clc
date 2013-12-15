@@ -92,6 +92,21 @@ public class ManagerController {
 		return "kqdanhgiaGV";
 	}
 	
+	@RequestMapping(value="timkiemGV", method=RequestMethod.GET)
+	public String timkiemGV(){
+		return "timkiemgiangvien";
+	}
+	
+	@RequestMapping(value="timkiemGV", method=RequestMethod.POST)
+	public String kqtimkiemGV(Model model, HttpServletRequest request) throws UnsupportedEncodingException{
+		request.setCharacterEncoding("UTF-8");
+		String idgv = request.getParameter("idgv");
+		String hoten = request.getParameter("hoten");
+		List<User> gvs = userService.findByIdAndHoten(idgv, hoten);
+		model.addAttribute("gvs", gvs);
+		return "tracuugiangvien";
+	}
+	
 	@RequestMapping(value = "kqdanhgiagv/{id}",method = RequestMethod.GET)
 	public String showkqdanhgiaGV(@PathVariable String id, Model model , HttpServletRequest request) {
 		// lay bang danh gia mau

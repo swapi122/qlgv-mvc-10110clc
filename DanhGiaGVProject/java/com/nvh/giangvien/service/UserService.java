@@ -14,8 +14,10 @@ public interface UserService {
 	public Page<User> findAllByPage(Pageable pageable);
 
 	public User findById(String id);
-
+	
 	public List<User> findByTypeAccount(int type);
+	
+	public List<User> findByIdAndHoten(String id, String hoten);
 	
 	public User save(User contact);
 

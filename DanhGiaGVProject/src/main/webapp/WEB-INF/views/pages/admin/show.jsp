@@ -19,8 +19,11 @@ function deleteQuestion(URL){
 		url : URL,
 		type : 'POST',
 		success : function(){
-			alert("Xoa thanh cong");
-			location.reload();
+			TINY.box.show({html:'Xóa Thành Công!',animate:true,close:true,boxid:'error',top:200});
+			var millisecondsToWait = 1000;
+			setTimeout(function() {
+				location.reload();
+			}, millisecondsToWait); 
 		}
 	});
 }
@@ -41,8 +44,11 @@ function deleteQuestion(URL){
 										type : 'POST',
 										data: formData,
 										success : function(){
-											alert("Thành công");
-											location.reload();
+											TINY.box.show({html:'Thành Công!',animate:true,close:true,boxid:'error',top:200});
+											var millisecondsToWait = 1000;
+											setTimeout(function() {
+												location.reload();
+											}, millisecondsToWait); 
 										}
 									});
 									$(this).dialog("close");

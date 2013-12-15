@@ -31,9 +31,15 @@ fieldset {
 			url : URL,
 			type : 'POST',
 			success : function(html) {
-				alert("Xóa Thành Công");
-				location.reload();
-			}
+				TINY.box.show({html:'Xóa Thành Công!',animate:true,close:false,boxid:'error',top:200});
+				var millisecondsToWait = 1000;
+				setTimeout(function() {
+					location.reload();
+				}, millisecondsToWait); 
+			},
+		    error: function(){
+		    	TINY.box.show({html:'Xóa Không Thành Công!<br />Hãy xóa câu hỏi trong bảng đánh giá trước',animate:true,close:false,boxid:'error',top:200});
+		     }
 		});
 	}
 
@@ -51,8 +57,11 @@ fieldset {
 						type : 'POST',
 						data : formData,
 						success : function() {
-							alert("Update thành công");
-							location.reload();
+							TINY.box.show({html:'Update Thành Công!',animate:false,close:false,boxid:'error',top:200});
+							var millisecondsToWait = 1000;
+							setTimeout(function() {
+								location.reload();
+							}, millisecondsToWait); 
 						}
 					});
 					$(this).dialog("close");
@@ -79,8 +88,11 @@ fieldset {
 						type : 'POST',
 						data : formData,
 						success : function() {
-							alert("Tạo thành công");
-							location.reload();
+							TINY.box.show({html:'Tạo Bảng Đánh Giá Thành Công!',animate:true,close:true,boxid:'error',top:200});
+							var millisecondsToWait = 1000;
+							setTimeout(function() {
+								location.reload();
+							}, millisecondsToWait); 
 						}
 					});
 					$(this).dialog("close");
