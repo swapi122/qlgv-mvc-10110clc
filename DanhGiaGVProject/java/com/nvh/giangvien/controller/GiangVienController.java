@@ -89,7 +89,12 @@ public class GiangVienController {
 	@RequestMapping(value = "kqdanhgia/{id}",method = RequestMethod.GET)
 	public String showkqdanhgia(@PathVariable String id, Model model , HttpServletRequest request) {
 		// lay bang danh gia mau
-		BangDanhGia bdg = bdgService.findById(Integer.parseInt(request.getParameter("iddg")));
+		BangDanhGia bdg;
+		if(Integer.parseInt(request.getParameter("iddg")) == choose.getId()){
+			bdg = choose.getBgd();
+		}else{
+			bdg = bdgService.findById(Integer.parseInt(request.getParameter("iddg")));
+		}
 		if (bdg == null) {
 			model.addAttribute("message", "Chưa chọn bảng đánh giá");
 			return "kqdanhgia";
