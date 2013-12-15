@@ -130,26 +130,24 @@ public class SinhVienCotroller {
 				return "sinhviendgia";
 			}
 		}
-		BangDanhGiaKq dgkq = bdgkqService.findByMonhocdg(tkbService
-				.findById(id));
+		ThoiKhoaBieu tkb = tkbService.findById(id);
+		BangDanhGiaKq dgkq = bdgkqService.findByMonhocdg(tkb);
 		if (dgkq == null) {
-			BangDanhGia bdg = bdgService.findById(choose.getId());
+			BangDanhGia bdg = choose.getBgd();
 			List<LoaiCauHoi> lchs = new ArrayList<LoaiCauHoi>(bdg.getLchs());
 			Collections.sort(lchs);
 			model.addAttribute("lchs", lchs);
 			// gom nhom
-			ThoiKhoaBieu tkb = tkbService.findById(id);
 			model.addAttribute("thoikhoabieu", tkb);
 			model.addAttribute("bangdanhgia", bdg);
 			return "sinhviendgia";
 		} else {
 			// da danh gia mon hoc nay roi
-			BangDanhGia bdg = bdgService.findById(choose.getId());
+			BangDanhGia bdg = choose.getBgd();
 			List<LoaiCauHoi> lchs = new ArrayList<LoaiCauHoi>(bdg.getLchs());
 			Collections.sort(lchs);
 			model.addAttribute("lchs", lchs);
 			// gom nhom
-			ThoiKhoaBieu tkb = tkbService.findById(id);
 			model.addAttribute("thoikhoabieu", tkb);
 			model.addAttribute("bangdanhgia", bdg);
 			model.addAttribute("bangdanhgiakq", dgkq);

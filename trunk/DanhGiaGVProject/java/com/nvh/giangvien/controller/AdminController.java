@@ -209,14 +209,15 @@ public class AdminController {
 
 	@RequestMapping(value = "setdanhgia/{id}", method = RequestMethod.POST)
 	public String setDanhGia(@PathVariable("id") int id, Model model, HttpServletRequest request) {
-		
 		String thoigianBD = request.getParameter("timebd");
 		String thoigianKT = request.getParameter("timekt");
 		DateTimeFormatter dateStringFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 		time.setTimeBD(dateStringFormat.parseDateTime(thoigianBD));
 		time.setTimeKT(dateStringFormat.parseDateTime(thoigianKT));
+		BangDanhGia bdg = dgService.findById(id);
 		logger.info("Set Danh Gia : " + time.getTimeBD().toString() + " | " + time.getTimeKT().toString());
 		choose.setId(id);
+		choose.setBgd(bdg);
 		return "admin/setdanhgia";
 	}
 	@PreAuthorize("isAuthenticated()")
