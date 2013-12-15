@@ -19,6 +19,8 @@ import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +39,12 @@ import com.nvh.giangvien.model.CauHoiKq;
 import com.nvh.giangvien.model.LoaiCauHoi;
 import com.nvh.giangvien.model.MonHoc;
 import com.nvh.giangvien.model.ThoiKhoaBieu;
+import com.nvh.giangvien.model.User;
 import com.nvh.giangvien.service.BangDanhGiaKqService;
 import com.nvh.giangvien.service.BangDanhGiaService;
 import com.nvh.giangvien.service.MonHocService;
 import com.nvh.giangvien.service.ThoiKhoaBieuService;
+import com.nvh.giangvien.service.UserService;
 import com.nvh.util.DisplayResult;
 
 @Controller
@@ -56,12 +60,17 @@ public class RevenueReportController{
 	private BangDanhGiaKqService dgkqService;
 	@Autowired
 	private BangDanhGiaService bdgService;
+	
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value = "/download" , method= RequestMethod.GET)
 	protected void handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		String iddg = request.getParameter("iddg");
 		String mhh = request.getParameter("mh");
+		String iduser = request.getParameter("iduser");
+		User user = userService.findById(iduser);
 		log.info(iddg + "|" + mhh);
 		response.setContentType("application/vnd.ms-excel");
 		response.setHeader("Content-Disposition",": attachment; filename=\"baocao.xls\"");
@@ -73,7 +82,7 @@ public class RevenueReportController{
 		font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
 
 		HSSFSheet worksheet = wb.createSheet("DanhGia");
-		worksheet.setColumnWidth(0, (20 * 128));
+		worksheet.setColumnWidth(0, (20 * 230));
 		worksheet.setColumnWidth(2, (20 * 128));
 		worksheet.setColumnWidth(1, (30 * 728));
 		worksheet.setColumnWidth(3, (20 * 128));
@@ -89,13 +98,28 @@ public class RevenueReportController{
 		row.createCell(0).setCellValue(
 				new HSSFRichTextString("Khoa đào tạo chất lượng cao"));
 
+		MonHoc mh = mhService.findById(mhh);
+		
 		worksheet.createRow(2);
 
-		row = worksheet.createRow(3);
+		row= worksheet.createRow(4);
+		row.createCell(0).setCellValue(new HSSFRichTextString("Giảng viên : "));
+		row.createCell(1).setCellValue(new HSSFRichTextString(user.getHoten()));
+		
+		row= worksheet.createRow(5);
+		row.createCell(0).setCellValue(new HSSFRichTextString("Môn giảng dạy : "));
+		row.createCell(1).setCellValue(new HSSFRichTextString(mh.getTenMH()));
+		
+		worksheet.createRow(6);
+		
+		row = worksheet.createRow(7);
 
 		HSSFCellStyle style = wb.createCellStyle();
+		style.setFillForegroundColor(HSSFColor.GREEN.index);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
 		font = wb.createFont();
+		font.setColor(HSSFColor.WHITE.index);
 		font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
 
 		value = new HSSFRichTextString("Mã Câu");
@@ -134,13 +158,13 @@ public class RevenueReportController{
 		cell.setCellValue(value);
 		cell.setCellStyle(style);
 
-		int rowIndex = 4;
+		int rowIndex = 8;
 		
 		BangDanhGia bdg = bdgService.findById(Integer.parseInt(iddg));
 		List<LoaiCauHoi> lchs = new ArrayList<LoaiCauHoi>(bdg.getLchs());
 		Collections.sort(lchs);
 
-		MonHoc mh = mhService.findById(mhh);
+		
 		List<ThoiKhoaBieu> tkbs = tkbService.findByMonhoc(mh);
 		List<BangDanhGiaKq> dgkqs = new ArrayList<BangDanhGiaKq>();
 		for (ThoiKhoaBieu thoiKhoaBieu : tkbs) {
