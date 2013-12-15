@@ -16,7 +16,7 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<description>Example configuration to get you started.</description>
-	<import resource="security-context.xml" />
+
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName">
@@ -35,17 +35,6 @@
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="emf" />
-	</bean>
-
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="10000000" />
-	</bean>
-	<bean id="ExcelSSummary" class="org.springframework.web.servlet.view.XmlViewResolver">
-		<property name="location">
-			<value>/WEB-INF/spring-excel-views.xml</value>
-		</property>
-		<property name="order" value="1" />
 	</bean>
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
@@ -68,23 +57,8 @@
 			</props>
 		</property>
 	</bean>
-
-	<bean id="messageSource"
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="classpath:messages/messages" />
-		<property name="defaultEncoding" value="UTF-8" />
-	</bean>
-
-	<bean id="reCaptcha" class="net.tanesha.recaptcha.ReCaptchaImpl">
-        <property name="privateKey" value="6Lds0OsSAAAAAEQvu-fQETRqdTGYE9V9miUemZLR"/>
-    </bean>
-
 	<context:annotation-config />
 	<context:component-scan base-package="com.nvh.giangvien.service.jpa" />
 	<jpa:repositories base-package="com.nvh.giangvien.repository"
 		entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager" />
-
-	<bean id="choosebang" class="com.nvh.applicationscope.BangDanhGiaChoose"></bean>
-	<bean id="time" class="com.nvh.giangvien.model.TimeBean"></bean>
-
 </beans>
