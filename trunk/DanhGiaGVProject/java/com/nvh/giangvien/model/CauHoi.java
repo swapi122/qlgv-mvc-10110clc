@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CAUHOI")
+@Table(name = "cauhoi")
 public class CauHoi implements Serializable{
 	private String id;
 	private String noidung;

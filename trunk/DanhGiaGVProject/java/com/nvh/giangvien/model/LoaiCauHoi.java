@@ -23,7 +23,7 @@ import javax.persistence.Table;
 import com.nvh.util.LoaiCauHoiComparator;
 
 @Entity
-@Table(name = "LOAICAUHOI")
+@Table(name = "loaicauhoi")
 public class LoaiCauHoi implements Serializable, Comparable<LoaiCauHoi>{
 	private int id;
 	private String tenloai;

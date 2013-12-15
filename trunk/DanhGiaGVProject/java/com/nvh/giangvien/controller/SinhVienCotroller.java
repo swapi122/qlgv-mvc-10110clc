@@ -172,18 +172,24 @@ public class SinhVienCotroller {
 			}
 			bdgkqService.save(dgkq);
 			model.addAttribute("success", "Đánh giá lưu thành công!");
-			return "danhgiasuccess";
+			User use = (User) request.getSession().getAttribute("account");
+			List<ThoiKhoaBieu> tkb = tkbService.findBySV(use);
+			model.addAttribute("tkblist", tkb);
+			return "sinhvien";
 		} catch (Exception e) {
 			// TODO: handle exception
+			User use = (User) request.getSession().getAttribute("account");
+			List<ThoiKhoaBieu> tkb = tkbService.findBySV(use);
+			model.addAttribute("tkblist", tkb);
 			model.addAttribute("fail", "Đánh giá lưu không thành công!");
-			return "danhgiasuccess";
+			return "sinhvien";
 		}
 		
 	}
 	
 	@RequestMapping(value = "/danhgia/{id}", params="update" ,method = RequestMethod.POST)
 	public String updatedanhgia(@PathVariable("id") int idBang,
-			HttpServletRequest request) {
+			HttpServletRequest request, Model model) {
 		int id = Integer.parseInt(request.getParameter("idtkb"));
 		BangDanhGiaKq dgkq = bdgkqService.findByMonhocdg(tkbService.findById(id));
 		// tim loai bang dung de danh gia
@@ -195,8 +201,12 @@ public class SinhVienCotroller {
 			chkq.setKetqua(kq.charAt(0));
 			chkqService.save(chkq);
 		}
-		dgkq.setNgaytao(new Date());
+		dgkq.setNgaytao(new Date());			
+		model.addAttribute("success", "Đánh giá lưu thành công!");
 		bdgkqService.save(dgkq);
+		User use = (User) request.getSession().getAttribute("account");
+		List<ThoiKhoaBieu> tkb = tkbService.findBySV(use);
+		model.addAttribute("tkblist", tkb);
 		return "sinhvien";
 	}
 	

@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="MONHOC")
+@Table(name="monhoc")
 public class MonHoc implements Serializable {
 
 	private String ID;
