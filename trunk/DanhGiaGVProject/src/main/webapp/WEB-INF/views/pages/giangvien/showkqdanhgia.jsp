@@ -82,16 +82,16 @@ function printResult(){
 									<div id="row">
 										<ul
 											style="list-style-type: none; margin: 0; padding: 0; width: 830px">
-											<li
+											<li title="${kq.noidungA}"
 												style="background-color: #196EEE ; width: ${((kq.numA/100 * 800) == 0) ? 0 : (kq.numA/100 * 770)}"
 												class="percent">${((kq.numA/100 * 750) == 0) ? "" : kq.noidungA}</li>
-											<li
+											<li title="${kq.noidungB}"
 												style="background-color: #DA4531 ; width: ${((kq.numB/100 * 800) == 0) ? 0 : (kq.numB/100 * 770)}"
 												class="percent">${((kq.numB/100 * 750) == 0) ? "" : kq.noidungB}</li>
-											<li
+											<li title="${kq.noidungC}"
 												style="background-color: #FFB700 ; width: ${((kq.numC/100 * 800) == 0) ? 0 : (kq.numC/100 * 770)}"
 												class="percent">${((kq.numC/100 * 750) == 0) ? "" : kq.noidungC}</li>
-											<li
+											<li  title="${kq.noidungD}"
 												style="background-color: #009855 ; width: ${((kq.numD/100 * 800) == 0) ? 0 : (kq.numD/100 * 770)} "
 												class="percent" style="border-right : 1px solid black;">${((kq.numD/100 * 750) == 0) ? "" : kq.noidungD}</li>
 										</ul>
