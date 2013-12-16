@@ -75,6 +75,13 @@ public class GiangVienController {
 		return "giangvien";
 	}
 
+	@RequestMapping(value="changepwd",method = RequestMethod.GET)
+	public String changePass(Model model) {
+		return "changepasswordGV";
+	}
+
+		
+	
 	@RequestMapping(value = "kqdanhgia", method = RequestMethod.GET)
 	public String kqdanhgia(HttpServletRequest request, Model model) {
 		User user = (User) request.getSession().getAttribute("account");

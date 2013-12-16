@@ -17,7 +17,7 @@
 		<a href="${pageContext.request.contextPath}/gvien/info?id=${account.id}">
 			<div class="row">Thông tin cá nhân</div>
 		</a>
-		<a href="${pageContext.request.contextPath}/changepwd">
+		<a href="${pageContext.request.contextPath}/gvien/changepwd">
 			<div class="row">Đổi mật khẩu</div>
 		</a>
 	</div>

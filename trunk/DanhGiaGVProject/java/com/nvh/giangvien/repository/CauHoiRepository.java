@@ -18,4 +18,5 @@ public interface CauHoiRepository extends CrudRepository<CauHoi, String> {
 	public List<CauHoi> findByloaicau(LoaiCauHoi lch);
 	
 	public List<CauHoi> findBybang(BangDanhGia lch);
+	
 }
