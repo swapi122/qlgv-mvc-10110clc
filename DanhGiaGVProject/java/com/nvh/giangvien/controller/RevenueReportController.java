@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
+import com.nvh.applicationscope.BangDanhGiaChoose;
 import com.nvh.giangvien.model.BangDanhGia;
 import com.nvh.giangvien.model.BangDanhGiaKq;
 import com.nvh.giangvien.model.CauHoi;
@@ -63,6 +64,9 @@ public class RevenueReportController{
 	
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private BangDanhGiaChoose choose;
 
 	@RequestMapping(value = "/download" , method= RequestMethod.GET)
 	protected void handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -159,19 +163,19 @@ public class RevenueReportController{
 		cell.setCellStyle(style);
 
 		int rowIndex = 8;
-		
-		BangDanhGia bdg = bdgService.findById(Integer.parseInt(iddg));
+		BangDanhGia bdg;
+		if(Integer.parseInt(request.getParameter("iddg")) == choose.getId()){
+			bdg = choose.getBgd();
+		}else{
+			bdg = bdgService.findById(Integer.parseInt(request.getParameter("iddg")));
+		}
 		List<LoaiCauHoi> lchs = new ArrayList<LoaiCauHoi>(bdg.getLchs());
 		Collections.sort(lchs);
 
-		
 		List<ThoiKhoaBieu> tkbs = tkbService.findByMonhoc(mh);
 		List<BangDanhGiaKq> dgkqs = new ArrayList<BangDanhGiaKq>();
 		for (ThoiKhoaBieu thoiKhoaBieu : tkbs) {
-			BangDanhGiaKq dgkq = null;
-			if ((dgkq = dgkqService.findByMonhocdg(thoiKhoaBieu)) != null) {
-				dgkqs.add(dgkq);
-			}
+			if(thoiKhoaBieu.getDgkq()!= null){ dgkqs.add(thoiKhoaBieu.getDgkq());}
 		}
 
 		for (CauHoi cauHoi : bdg.getCauhois()) {

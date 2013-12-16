@@ -109,10 +109,7 @@ public class GiangVienController {
 		List<ThoiKhoaBieu> tkbs = tkbService.findByMonhoc(mh);
 		List<BangDanhGiaKq> dgkqs = new ArrayList<BangDanhGiaKq>();
 		for (ThoiKhoaBieu thoiKhoaBieu : tkbs) {
-			BangDanhGiaKq dgkq = null;
-			if ((dgkq = dgkqService.findByMonhocdg(thoiKhoaBieu)) != null) {
-				dgkqs.add(dgkq);
-			}
+			if(thoiKhoaBieu.getDgkq()!= null){ dgkqs.add(thoiKhoaBieu.getDgkq());}
 		}
 		List<DisplayResult> kqs = new ArrayList<DisplayResult>();
 		for (CauHoi cauHoi : bdg.getCauhois()) {

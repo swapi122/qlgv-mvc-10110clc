@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "thoikhoabieu")
@@ -24,6 +25,17 @@ public class ThoiKhoaBieu implements Serializable {
 	private MonHoc monhoc;
 	
 	
+	private BangDanhGiaKq dgkq;
+	
+	@OneToOne(mappedBy = "monhocdg")
+	public BangDanhGiaKq getDgkq() {
+		return dgkq;
+	}
+
+	public void setDgkq(BangDanhGiaKq dgkq) {
+		this.dgkq = dgkq;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID")

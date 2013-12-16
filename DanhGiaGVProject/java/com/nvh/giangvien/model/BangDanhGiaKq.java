@@ -25,7 +25,10 @@ import javax.persistence.TemporalType;
 public class BangDanhGiaKq implements Serializable{
 
 	private int id;
+	
+
 	private ThoiKhoaBieu monhocdg;
+	
 	private BangDanhGia loaiBang;
 	private Date ngaytao;
 	
@@ -41,8 +44,9 @@ public class BangDanhGiaKq implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	@OneToOne
-	@JoinColumn(name="THOIKHOABIEU_ID")
+	@JoinColumn(name = "THOIKHOABIEU_ID", referencedColumnName = "ID")
 	public ThoiKhoaBieu getMonhocdg() {
 		return monhocdg;
 	}
